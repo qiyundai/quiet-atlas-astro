@@ -1,0 +1,156 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact" description="Get in touch with Quiet Atlas.">
+  <section class="page-header">
+    <div class="container">
+      <div class="masthead">
+        <div class="date">The Quiet Atlas Chronicle</div>
+        <h1>Contact</h1>
+        <p class="text-faded text-serif">Correspondence Welcome</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-content container">
+    <div class="content-width">
+      <div class="contact-intro fade-in">
+        <p class="text-large text-serif text-center">
+          We'd love to hear from you.
+        </p>
+        <p class="text-center">
+          Whether you have thoughts about our games, want to collaborate, 
+          or just want to say hello—our door is always open.
+        </p>
+      </div>
+
+      <hr class="ornamental" />
+
+      <div class="contact-methods fade-in">
+        <div class="contact-card">
+          <div class="contact-card-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 5H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Z"/>
+              <path d="m3 7 9 6 9-6"/>
+            </svg>
+          </div>
+          <h2>General Inquiries</h2>
+          <p>For questions, feedback, or just to connect.</p>
+          <p class="contact-detail">
+            <em>Contact form coming soon</em>
+          </p>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Z"/>
+              <path d="M2 12h20"/>
+              <path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10Z"/>
+            </svg>
+          </div>
+          <h2>Find Our Games</h2>
+          <p>Play, follow, and support our work.</p>
+          <a href="https://quietatlas.itch.io/" target="_blank" rel="noopener noreferrer" class="btn">
+            itch.io
+          </a>
+        </div>
+      </div>
+
+      <hr class="ornamental" />
+
+      <div class="contact-note fade-in text-center">
+        <p class="text-faded">
+          <strong>Quiet Atlas</strong><br/>
+          Ontario, Canada<br/>
+          <em>An indie label for games that breathe.</em>
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+  }
+  
+  .page-header h1 {
+    margin-bottom: var(--space-sm);
+  }
+  
+  .contact-content {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-2xl);
+  }
+  
+  .contact-intro {
+    margin-bottom: var(--space-lg);
+  }
+  
+  .contact-intro p {
+    max-width: 100%;
+  }
+  
+  /* Contact Methods */
+  .contact-methods {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+  }
+  
+  .contact-card {
+    text-align: center;
+    padding: var(--space-xl);
+    border: 1px solid var(--ink-faded);
+    background: var(--paper-aged);
+    transition: all var(--duration-normal) var(--ease-gentle);
+  }
+  
+  .contact-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(45, 41, 38, 0.08);
+  }
+  
+  .contact-card-icon {
+    color: var(--ink-faded);
+    margin-bottom: var(--space-md);
+  }
+  
+  .contact-card h2 {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-sm);
+  }
+  
+  .contact-card p {
+    max-width: 100%;
+    color: var(--ink-light);
+    margin-bottom: var(--space-md);
+  }
+  
+  .contact-detail {
+    font-family: var(--font-serif);
+    color: var(--ink-faded);
+    font-size: 0.9rem;
+  }
+  
+  @media (max-width: 768px) {
+    .contact-methods {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* Contact Note */
+  .contact-note {
+    padding-top: var(--space-lg);
+  }
+  
+  .contact-note p {
+    max-width: 100%;
+    line-height: 1.8;
+  }
+</style>

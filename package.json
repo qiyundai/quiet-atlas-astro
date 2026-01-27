@@ -1,0 +1,14 @@
+{
+  "name": "quiet-atlas",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Quiet Atlas - An indie label for healing-oriented, contemplative games",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^4.16.0"
+  }
+}

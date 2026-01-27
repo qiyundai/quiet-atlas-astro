@@ -1,0 +1,462 @@
+/* ============================================
+   QUIET ATLAS - Global Styles
+   Old newspaper aesthetic with zen interactions
+   ============================================ */
+
+/* CSS Custom Properties */
+:root {
+  /* Paper & Ink */
+  --paper: #f8f4eb;
+  --paper-aged: #f0ebe0;
+  --paper-dark: #e8e2d5;
+  --ink: #2d2926;
+  --ink-light: #4a4540;
+  --ink-faded: #6b635a;
+  --accent: #8b7355;
+  --accent-warm: #a08060;
+  
+  /* Typography Scale */
+  --font-serif: 'Playfair Display', 'Georgia', serif;
+  --font-body: 'Source Serif 4', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+  --space-2xl: 8rem;
+  
+  /* Animation */
+  --ease-gentle: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 200ms;
+  --duration-normal: 400ms;
+  --duration-slow: 800ms;
+  
+  /* Layout */
+  --max-width: 1200px;
+  --content-width: 720px;
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 18px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--paper);
+  color: var(--ink);
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+  
+  /* Subtle paper texture overlay */
+  background-image: 
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-blend-mode: soft-light;
+  background-size: 200px;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  margin-bottom: var(--space-lg);
+}
+
+h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin-bottom: var(--space-md);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  margin-bottom: var(--space-sm);
+}
+
+p {
+  margin-bottom: var(--space-md);
+}
+
+a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: all var(--duration-fast) var(--ease-gentle);
+}
+
+a:hover {
+  color: var(--accent);
+  text-decoration-thickness: 2px;
+}
+
+/* Selection */
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ink-faded);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-light);
+}
+
+/* ============================================
+   Layout Components
+   ============================================ */
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* Responsive gutters for mobile */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--space-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1.25rem;
+  }
+}
+
+.content-width {
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+/* Newspaper-style horizontal rules */
+hr {
+  border: none;
+  height: 1px;
+  background: var(--ink);
+  margin: var(--space-xl) 0;
+  opacity: 0.3;
+}
+
+hr.ornamental {
+  height: auto;
+  background: none;
+  text-align: center;
+  opacity: 1;
+}
+
+hr.ornamental::before {
+  content: '◆ ◆ ◆';
+  color: var(--ink-faded);
+  font-size: 0.75rem;
+  letter-spacing: 0.5em;
+}
+
+/* ============================================
+   Animation Classes
+   ============================================ */
+
+/* Fade in on scroll */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 
+    opacity var(--duration-slow) var(--ease-gentle),
+    transform var(--duration-slow) var(--ease-gentle);
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: 
+    opacity var(--duration-normal) var(--ease-gentle),
+    transform var(--duration-normal) var(--ease-gentle);
+}
+
+.stagger-children.visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
+.stagger-children.visible > *:nth-child(2) { transition-delay: 100ms; opacity: 1; transform: translateY(0); }
+.stagger-children.visible > *:nth-child(3) { transition-delay: 200ms; opacity: 1; transform: translateY(0); }
+.stagger-children.visible > *:nth-child(4) { transition-delay: 300ms; opacity: 1; transform: translateY(0); }
+.stagger-children.visible > *:nth-child(5) { transition-delay: 400ms; opacity: 1; transform: translateY(0); }
+
+/* Gentle float animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.float {
+  animation: float 6s var(--ease-gentle) infinite;
+}
+
+/* Breathing animation */
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.02); opacity: 1; }
+}
+
+.breathe {
+  animation: breathe 4s var(--ease-gentle) infinite;
+}
+
+/* Typewriter cursor */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor::after {
+  content: '|';
+  animation: blink 1s infinite;
+  margin-left: 2px;
+}
+
+/* ============================================
+   Newspaper-specific Styles
+   ============================================ */
+
+/* Drop cap */
+.drop-cap::first-letter {
+  float: left;
+  font-family: var(--font-serif);
+  font-size: 4.5em;
+  line-height: 0.8;
+  padding-right: 0.1em;
+  margin-top: 0.05em;
+  color: var(--ink);
+}
+
+@media (max-width: 768px) {
+  .drop-cap::first-letter {
+    font-size: 3em;
+    line-height: 0.85;
+    padding-right: 0.08em;
+  }
+}
+
+@media (max-width: 480px) {
+  .drop-cap::first-letter {
+    font-size: 2.5em;
+  }
+}
+
+/* Column layout */
+.columns {
+  column-count: 2;
+  column-gap: var(--space-xl);
+  column-rule: 1px solid var(--ink-faded);
+}
+
+@media (max-width: 768px) {
+  .columns {
+    column-count: 1;
+  }
+}
+
+/* Masthead style */
+.masthead {
+  text-align: center;
+  padding: var(--space-xl) 0;
+  border-bottom: 3px double var(--ink);
+}
+
+.masthead .date {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--ink-faded);
+  margin-bottom: var(--space-sm);
+}
+
+/* Article card */
+.article-card {
+  background: var(--paper);
+  border: 1px solid var(--ink-faded);
+  padding: var(--space-lg);
+  transition: all var(--duration-normal) var(--ease-gentle);
+  position: relative;
+}
+
+.article-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: 0 4px 20px rgba(45, 41, 38, 0);
+  transition: box-shadow var(--duration-normal) var(--ease-gentle);
+  pointer-events: none;
+}
+
+.article-card:hover::before {
+  box-shadow: 0 8px 30px rgba(45, 41, 38, 0.1);
+}
+
+.article-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Pull quote */
+.pull-quote {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-style: italic;
+  text-align: center;
+  padding: var(--space-md) 0;
+  margin: var(--space-xl) 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  color: var(--ink-light);
+}
+
+@media (max-width: 768px) {
+  .pull-quote {
+    font-size: 1.25rem;
+    padding: var(--space-sm) 0;
+    margin: var(--space-sm) 0;
+  }
+}
+
+/* Byline */
+.byline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--ink-faded);
+  margin-bottom: var(--space-md);
+}
+
+/* Section header (newspaper style) */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.section-header::before,
+.section-header::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--ink);
+}
+
+.section-header span {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--ink-faded);
+}
+
+/* ============================================
+   Interactive Elements
+   ============================================ */
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: var(--space-sm) var(--space-lg);
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-gentle);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--ink);
+  transition: left var(--duration-normal) var(--ease-gentle);
+  z-index: -1;
+}
+
+.btn:hover {
+  color: var(--paper);
+  text-decoration: none;
+}
+
+.btn:hover::before {
+  left: 0;
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+.text-center { text-align: center; }
+.text-faded { color: var(--ink-faded); }
+.text-small { font-size: 0.85rem; }
+.text-large { font-size: 1.25rem; }
+.text-serif { font-family: var(--font-serif); }
+
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mt-xl { margin-top: var(--space-xl); }
+
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.mb-xl { margin-bottom: var(--space-xl); }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}

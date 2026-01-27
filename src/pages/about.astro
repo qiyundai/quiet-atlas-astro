@@ -1,0 +1,184 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="About" description="Learn about Quiet Atlas - an indie label creating healing-oriented, contemplative games.">
+  <section class="page-header">
+    <div class="container">
+      <div class="masthead">
+        <div class="date">The Quiet Atlas Chronicle</div>
+        <h1>About Us</h1>
+        <p class="text-faded text-serif text-center">Volume I • The Beginning</p>
+      </div>
+    </div>
+  </section>
+
+  <article class="about-content container">
+    <div class="content-width">
+      <div class="article-lead fade-in">
+        <p class="drop-cap">
+          Quiet Atlas began with a simple belief: games can be medicine. Not in a clinical sense, 
+          but in the way a long walk can be medicine, or the way sitting with an old friend in 
+          comfortable silence can be medicine.
+        </p>
+      </div>
+
+      <div class="pull-quote fade-in">
+        "We make games for the moments when you need to feel held by something gentle."
+      </div>
+
+      <section class="about-section fade-in">
+        <h2>What We Believe</h2>
+        <p>
+          We believe in games that don't demand. Games that invite. Spaces that feel more like 
+          a hand on your shoulder than a challenge to overcome.
+        </p>
+        <p>
+          This doesn't mean our games lack depth or meaning—quite the opposite. We believe 
+          gentleness requires courage. Softness is a kind of strength.
+        </p>
+      </section>
+
+      <section class="about-section fade-in">
+        <h2>How We Create</h2>
+        <div class="principles">
+          <div class="principle">
+            <h3>Low UI</h3>
+            <p>Interfaces should whisper, not shout. We strip away everything that doesn't serve the feeling.</p>
+          </div>
+          <div class="principle">
+            <h3>Low Friction</h3>
+            <p>The path between wanting to play and actually playing should be as smooth as breathing.</p>
+          </div>
+          <div class="principle">
+            <h3>High Atmosphere</h3>
+            <p>Every pixel, every sound, every pause contributes to a world you want to inhabit.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-section fade-in">
+        <h2>The Name</h2>
+        <p>
+          An atlas is a book of maps—a guide to worlds. We chose "Quiet" because our maps 
+          lead to places of stillness. Places where the noise settles. Places where you can 
+          hear yourself think, or better yet, stop thinking altogether.
+        </p>
+        <p>
+          Quiet Atlas is a cartography of calm.
+        </p>
+      </section>
+
+      <section class="about-section fade-in">
+        <h2>Who We Are</h2>
+        <p>
+          Quiet Atlas is an indie label based in Ontario, Canada. We're small by design—big 
+          enough to make things that matter, small enough to make them with care.
+        </p>
+        <p>
+          Every game we release carries our belief that play can be a form of self-care. 
+          That joy and tenderness aren't opposites. That wonder is ageless.
+        </p>
+      </section>
+
+      <hr class="ornamental" />
+
+      <div class="about-closing text-center fade-in">
+        <p class="text-large text-serif">
+          Thank you for being here.<br/>
+          We hope our games find you when you need them.
+        </p>
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .page-header {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+  }
+  
+  .page-header h1 {
+    margin-bottom: var(--space-sm);
+  }
+  
+  .about-content {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-2xl);
+  }
+  
+  .article-lead {
+    margin-bottom: var(--space-xl);
+  }
+  
+  .article-lead p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+  }
+  
+  .about-section {
+    margin-bottom: var(--space-xl);
+  }
+  
+  .about-section h2 {
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--ink-faded);
+  }
+  
+  .about-section p {
+    font-size: 1.05rem;
+  }
+  
+  /* Principles Grid */
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+  }
+  
+  .principle {
+    padding: var(--space-lg);
+    border: 1px solid var(--ink-faded);
+    background: var(--paper-aged);
+    transition: all var(--duration-normal) var(--ease-gentle);
+  }
+  
+  .principle:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(45, 41, 38, 0.08);
+  }
+  
+  .principle h3 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-sm);
+    color: var(--accent);
+  }
+  
+  .principle p {
+    font-size: 0.95rem;
+    color: var(--ink-light);
+    margin: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .principles {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* Closing */
+  .about-closing {
+    padding-top: var(--space-xl);
+  }
+  
+  .about-closing p {
+    max-width: 100%;
+    color: var(--ink-light);
+    line-height: 1.9;
+  }
+</style>
