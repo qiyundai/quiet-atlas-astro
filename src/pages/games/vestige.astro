@@ -1,0 +1,260 @@
+---
+import GamesLayout from '../../layouts/GamesLayout.astro';
+---
+
+<GamesLayout title="Vestige" description="Vestige — an atmospheric exploration game by Quiet Atlas. Walk through remnants of a world that remembers you.">
+  <!-- Hero -->
+  <section class="game-hero">
+    <div class="game-hero-visual vestige-bg">
+      <div class="game-hero-overlay"></div>
+      <div class="game-hero-content container fade-in">
+        <span class="game-hero-label">Atmospheric Exploration</span>
+        <h1 class="game-hero-title">Vestige</h1>
+        <p class="game-hero-tagline">A world that remembers, even when you forget.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="game-about container">
+    <div class="content-width">
+      <div class="game-lead fade-in">
+        <p class="lead-text">
+          Vestige is a quiet game about walking through places that used to matter.
+          Landscapes shift with the weight of memory — paths close behind you, light
+          changes with your attention, and the world responds not to what you do,
+          but to how long you stay.
+        </p>
+      </div>
+
+      <div class="pull-quote fade-in">
+        "Not all who wander are lost. Some are just remembering."
+      </div>
+
+      <div class="game-details fade-in">
+        <h2>The Experience</h2>
+        <p>
+          There is no combat. No score. No fail state. Vestige asks only that you
+          walk, and that you pay attention. The world unfolds differently for those
+          who linger — hidden details emerge when you slow down, and the landscape
+          itself becomes a conversation between what was and what remains.
+        </p>
+        <p>
+          Every environment was hand-crafted to feel like a place you've been before,
+          even if you haven't. We wanted to capture that specific ache of returning
+          somewhere after years away — when everything is the same but nothing feels
+          like it used to.
+        </p>
+      </div>
+
+      <div class="game-features stagger-children">
+        <div class="feature-card card">
+          <h3>Memory-Responsive World</h3>
+          <p>The environment shifts based on presence and attention, not action or skill.</p>
+        </div>
+        <div class="feature-card card">
+          <h3>No Fail State</h3>
+          <p>There is no wrong way to play. Every path leads somewhere worth being.</p>
+        </div>
+        <div class="feature-card card">
+          <h3>Ambient Soundscape</h3>
+          <p>A living audio environment that breathes with you, never against you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info Sidebar -->
+  <section class="game-info container">
+    <div class="info-grid fade-in">
+      <div class="info-block">
+        <h3>Status</h3>
+        <p>In Development</p>
+      </div>
+      <div class="info-block">
+        <h3>Genre</h3>
+        <p>Atmospheric Exploration</p>
+      </div>
+      <div class="info-block">
+        <h3>Platform</h3>
+        <p>PC / Mac</p>
+      </div>
+      <div class="info-block">
+        <h3>Engine</h3>
+        <p>Custom</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta container">
+    <div class="cta-inner fade-in">
+      <hr class="ornamental" />
+      <p class="cta-text">Vestige is still being drawn. Follow us to walk with it when it's ready.</p>
+      <a href="https://quietatlas.itch.io/" target="_blank" rel="noopener noreferrer" class="btn btn-large">Follow on itch.io</a>
+    </div>
+  </section>
+</GamesLayout>
+
+<style>
+  /* ─── Game Hero ─── */
+  .game-hero {
+    margin-top: calc(-1 * var(--nav-height));
+  }
+
+  .game-hero-visual {
+    min-height: 60vh;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
+
+  .vestige-bg {
+    background: linear-gradient(160deg, #0a0a1a 0%, #0f1a2e 40%, #162340 70%, #0f3460 100%);
+  }
+
+  .game-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(8, 8, 12, 0.3) 0%, rgba(8, 8, 12, 0.9) 100%);
+  }
+
+  .game-hero-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .game-hero-label {
+    display: inline-block;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-bottom: var(--space-md);
+  }
+
+  .game-hero-title {
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: var(--space-md);
+  }
+
+  .game-hero-tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin: 0;
+  }
+
+  /* ─── Game About ─── */
+  .game-about {
+    padding: var(--space-2xl) 0;
+  }
+
+  .lead-text {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  .game-details {
+    margin-top: var(--space-xl);
+  }
+
+  .game-details h2 {
+    font-size: 1.75rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .game-details p {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  /* ─── Features ─── */
+  .game-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+  }
+
+  .feature-card h3 {
+    font-size: 1rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .feature-card p {
+    font-family: var(--font-serif);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .game-features {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ─── Info Grid ─── */
+  .game-info {
+    padding: var(--space-xl) 0;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+  }
+
+  .info-block h3 {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-xs);
+  }
+
+  .info-block p {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    color: var(--text);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .info-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* ─── CTA ─── */
+  .cta {
+    padding: var(--space-xl) 0 var(--space-2xl);
+  }
+
+  .cta-inner {
+    text-align: center;
+  }
+
+  .cta-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+  }
+</style>

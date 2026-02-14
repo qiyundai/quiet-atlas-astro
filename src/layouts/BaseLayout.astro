@@ -1,0 +1,113 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  facet?: 'web' | 'games' | 'home';
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = "A calm, deliberate studio with two creative outputs — one pragmatic, one expressive.",
+  facet = 'home',
+  ogImage,
+} = Astro.props;
+
+const seoTitle = facet === 'home'
+  ? 'Quiet Atlas | Web Development & Indie Games Studio'
+  : facet === 'web'
+    ? `${title} | Quiet Atlas — Web Development Studio`
+    : `${title} | Quiet Atlas — Indie Game Development`;
+---
+
+<!DOCTYPE html>
+<html lang="en" data-facet={facet}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <link rel="icon" type="image/png" href="/logo.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={seoTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  {ogImage && <meta property="og:image" content={ogImage} />}
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <title>{seoTitle}</title>
+</head>
+<body>
+  <slot />
+
+  <script>
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    document.querySelectorAll('.fade-in, .stagger-children').forEach((el) => {
+      observer.observe(el);
+    });
+
+    // Page transition — fade in
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 0.45s ease';
+    window.addEventListener('load', () => {
+      document.body.style.opacity = '1';
+    });
+
+    // Internal link fade-out transitions
+    document
+      .querySelectorAll(
+        'a:not([target="_blank"]):not([href^="#"]):not([href^="http"]):not([href^="mailto"])'
+      )
+      .forEach((link) => {
+        link.addEventListener('click', function (this: HTMLAnchorElement, e: Event) {
+          const href = this.getAttribute('href');
+          if (href) {
+            e.preventDefault();
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+              window.location.href = href;
+            }, 280);
+          }
+        });
+      });
+
+    // Keyboard navigation awareness
+    document.body.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') document.body.classList.add('using-keyboard');
+    });
+    document.body.addEventListener('mousedown', () => {
+      document.body.classList.remove('using-keyboard');
+    });
+  </script>
+</body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+
+  body.using-keyboard *:focus {
+    outline: 2px solid var(--accent, #2b6cb0);
+    outline-offset: 3px;
+  }
+  body:not(.using-keyboard) *:focus {
+    outline: none;
+  }
+</style>

@@ -1,294 +1,340 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<Layout title="Home">
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-inner container">
-      <div class="hero-content fade-in">
-        <div class="hero-date">Est. 2025 • Ontario, Canada</div>
-        <h1 class="hero-title">Quiet Atlas</h1>
-        <p class="hero-subtitle">An indie label for healing-oriented, contemplative games.</p>
-        <div class="hero-tagline">
-          <span class="hero-tagline-text">Games that breathe.</span>
-        </div>
-      </div>
-      
-      <div class="hero-logo float">
-        <img src="/logo.png" alt="Quiet Atlas Globe" />
-      </div>
-    </div>
-    
-    <div class="hero-scroll">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
+<BaseLayout
+  title="Home"
+  facet="home"
+  description="Quiet Atlas is a studio with two creative outputs — web development and indie games. Calm, deliberate, and crafted."
+>
+  <div class="split-home">
+    <!-- Central Brand -->
+    <header class="split-brand">
+      <h1 class="brand-name">Quiet Atlas</h1>
+      <p class="brand-sub">Two disciplines. One studio.</p>
+    </header>
 
-  <!-- Philosophy Section -->
-  <section class="philosophy container">
-    <div class="section-header">
-      <span>Our Philosophy</span>
-    </div>
-    
-    <div class="philosophy-content content-width">
-      <p class="drop-cap fade-in">
-        We believe games can be a place of rest. Not escape—rest. A space where you're invited to slow down, 
-        to feel without explanation, to remember something you didn't know you'd forgotten.
-      </p>
-      
-      <div class="pull-quote fade-in">
-        "A place that helps people remember how to be soft."
-      </div>
-      
-      <p class="fade-in">
-        Quiet Atlas games are gentle but not shallow. Emotionally sincere without being melodramatic. 
-        We treat childlike belief with adult respect—because wonder doesn't need to be outgrown.
-      </p>
-      
-      <p class="fade-in">
-        Low UI. Low friction. High atmosphere.
-      </p>
-    </div>
-  </section>
-
-  <!-- Featured Section -->
-  <section class="featured container">
-    <div class="section-header">
-      <span>Now Playing</span>
-    </div>
-    
-    <article class="featured-article fade-in">
-      <div class="featured-header">
-        <span class="featured-label">Featured Release</span>
-        <h2 class="featured-title">Bullet Well</h2>
-        <p class="byline">A quirky arcade experiment in doodle-style chaos</p>
-      </div>
-      
-      <div class="featured-body">
-        <p>
-          Sometimes healing comes from the most unexpected places. Bullet Well blends the 
-          vertical momentum of Doodle Jump with the beautiful chaos of bullet hell—rendered 
-          in a playful scribble aesthetic that feels like notebook margins come to life.
+    <!-- Web Dev Panel -->
+    <a href="/web" class="split-panel panel-web" aria-label="Explore Web Development">
+      <div class="panel-content">
+        <span class="panel-label">Web Development</span>
+        <h2 class="panel-title">
+          Calm.<br />Deliberate.<br />Crafted.
+        </h2>
+        <p class="panel-desc">
+          We build lasting websites for people who value substance over noise. Static architecture, git-based content, zero maintenance headaches.
         </p>
-        
-        <a href="/games" class="btn">Read More</a>
+        <span class="panel-cta">
+          Explore Web
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+        </span>
       </div>
-    </article>
-  </section>
+    </a>
 
-  <!-- Call to Action -->
-  <section class="cta container">
-    <div class="cta-inner fade-in">
-      <hr class="ornamental" />
-      <p class="cta-text">
-        Interested in what we're creating?
-      </p>
-      <a href="https://quietatlas.itch.io/" target="_blank" rel="noopener noreferrer" class="btn">
-        Visit us on itch.io
-      </a>
-    </div>
-  </section>
-</Layout>
+    <!-- Games Dev Panel -->
+    <a href="/games" class="split-panel panel-games" aria-label="Explore Game Development">
+      <div class="panel-content">
+        <span class="panel-label">Game Development</span>
+        <h2 class="panel-title">
+          Emotional.<br />Bold.<br />Expressive.
+        </h2>
+        <p class="panel-desc">
+          Indie games made with soul, artistic vision, and a belief that wonder doesn't need to be outgrown.
+        </p>
+        <span class="panel-cta">
+          Explore Games
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- Footer -->
+    <footer class="split-footer">
+      <span>&copy; {new Date().getFullYear()} Quiet Atlas &middot; Ontario, Canada</span>
+    </footer>
+  </div>
+</BaseLayout>
 
 <style>
-  /* Hero Section */
-  .hero {
-    min-height: calc(100vh - 70px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    padding: var(--space-xl) 0;
-  }
-  
-  .hero-inner {
+  /* ─── Split Layout ─── */
+  .split-home {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+    transition: grid-template-columns 0.6s var(--ease-gentle);
+  }
+
+  /* Hover expansion — subtle 50/50 → 53/47 shift */
+  .split-home:has(.panel-web:hover) {
+    grid-template-columns: 1.06fr 0.94fr;
+  }
+  .split-home:has(.panel-games:hover) {
+    grid-template-columns: 0.94fr 1.06fr;
+  }
+
+  /* ─── Brand Header ─── */
+  .split-brand {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: var(--space-lg) var(--space-lg) var(--space-md);
+    z-index: 10;
+    background: linear-gradient(to right, #f7f7f5 50%, #08080c 50%);
+  }
+
+  .brand-name {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.25rem;
+    color: #1a1a1a;
+    /* Blend text for centered effect */
+    background: linear-gradient(to right, #1a1a1a 45%, #e8e6e3 55%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .brand-sub {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0;
+    color: transparent;
+    background: linear-gradient(to right, #8a8a8a 45%, #5a5856 55%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ─── Panels ─── */
+  .split-panel {
+    grid-row: 2;
+    display: flex;
     align-items: center;
-    gap: var(--space-xl);
+    justify-content: center;
+    padding: var(--space-xl) var(--space-lg);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s var(--ease-gentle);
   }
-  
-  .hero-date {
+
+  .panel-web {
+    grid-column: 1;
+    background: #f7f7f5;
+    color: #1a1a1a;
+  }
+
+  .panel-games {
+    grid-column: 2;
+    background: #08080c;
+    color: #e8e6e3;
+    /* Subtle noise texture on games panel */
+    background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    background-color: #08080c;
+    background-size: 256px;
+  }
+
+  /* Hover glow effects */
+  .panel-web::before,
+  .panel-games::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.5s var(--ease-gentle);
+    pointer-events: none;
+  }
+
+  .panel-web::before {
+    background: radial-gradient(ellipse at center, rgba(43, 108, 176, 0.04) 0%, transparent 70%);
+  }
+
+  .panel-games::before {
+    background: radial-gradient(ellipse at center, rgba(255, 92, 138, 0.06) 0%, transparent 70%);
+  }
+
+  .split-panel:hover::before {
+    opacity: 1;
+  }
+
+  .panel-content {
+    max-width: 400px;
+    text-align: left;
+  }
+
+  /* ─── Panel Typography ─── */
+  .panel-label {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: var(--space-lg);
+    opacity: 0.5;
+  }
+
+  .panel-web .panel-label {
+    font-family: var(--font-sans);
+    color: #2b6cb0;
+    opacity: 0.7;
+  }
+
+  .panel-games .panel-label {
     font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 0.85rem;
-    color: var(--ink-faded);
-    margin-bottom: var(--space-md);
-    letter-spacing: 0.05em;
+    color: #ff5c8a;
+    opacity: 0.7;
   }
-  
-  .hero-title {
-    font-size: clamp(3rem, 10vw, 7rem);
-    margin-bottom: var(--space-md);
-    line-height: 0.95;
-  }
-  
-  .hero-subtitle {
-    font-size: clamp(1rem, 2.5vw, 1.35rem);
-    color: var(--ink-light);
-    max-width: 500px;
+
+  .panel-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
     margin-bottom: var(--space-lg);
   }
-  
-  .hero-tagline {
-    display: inline-block;
-    padding: var(--space-sm) var(--space-lg);
-    border: 1px solid var(--ink);
-    position: relative;
+
+  .panel-web .panel-title { color: #1a1a1a; }
+  .panel-games .panel-title { color: #e8e6e3; }
+
+  .panel-desc {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin-bottom: var(--space-xl);
+    max-width: 340px;
   }
-  
-  .hero-tagline-text {
+
+  .panel-web .panel-desc {
+    font-family: var(--font-sans);
+    color: #4a4a4a;
+  }
+
+  .panel-games .panel-desc {
     font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1.1rem;
+    color: #b0ada8;
   }
-  
-  .hero-logo {
-    width: clamp(150px, 20vw, 280px);
-    opacity: 0.9;
-  }
-  
-  .hero-logo img {
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
-    filter: grayscale(20%);
-  }
-  
-  .hero-scroll {
-    position: absolute;
-    bottom: var(--space-xl);
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
+
+  /* ─── CTA ─── */
+  .panel-cta {
+    display: inline-flex;
     align-items: center;
-    gap: var(--space-sm);
-    color: var(--ink-faded);
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: all var(--duration-normal) var(--ease-gentle);
+  }
+
+  .panel-web .panel-cta {
+    font-family: var(--font-sans);
+    color: #2b6cb0;
+  }
+
+  .panel-games .panel-cta {
     font-family: var(--font-serif);
+    color: #ff5c8a;
+  }
+
+  .panel-cta svg {
+    transition: transform var(--duration-normal) var(--ease-gentle);
+  }
+
+  .split-panel:hover .panel-cta svg {
+    transform: translateX(4px);
+  }
+
+  /* ─── Footer ─── */
+  .split-footer {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    text-align: center;
+    padding: var(--space-md) var(--space-lg);
     font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.04em;
+    background: linear-gradient(to right, #f7f7f5 50%, #08080c 50%);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
-  
-  .scroll-line {
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(to bottom, var(--ink-faded), transparent);
-    animation: scrollPulse 2s ease-in-out infinite;
+
+  .split-footer span {
+    background: linear-gradient(to right, #8a8a8a 45%, #5a5856 55%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
-  
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.3; transform: scaleY(1); }
-    50% { opacity: 1; transform: scaleY(1.2); }
-  }
-  
+
+  /* ─── Mobile ─── */
   @media (max-width: 768px) {
-    .hero-inner {
+    .split-home,
+    .split-home:has(.panel-web:hover),
+    .split-home:has(.panel-games:hover) {
       grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto auto;
+    }
+
+    .split-brand {
+      grid-column: 1;
+      grid-row: 1;
+      background: #f7f7f5;
+      padding: var(--space-lg) var(--space-md) var(--space-md);
+    }
+
+    .brand-name {
+      background: none;
+      -webkit-text-fill-color: #1a1a1a;
+      color: #1a1a1a;
+    }
+
+    .brand-sub {
+      background: none;
+      -webkit-text-fill-color: #8a8a8a;
+      color: #8a8a8a;
+    }
+
+    .panel-web {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .panel-games {
+      grid-column: 1;
+      grid-row: 3;
+    }
+
+    .split-footer {
+      grid-column: 1;
+      grid-row: 4;
+      background: #08080c;
+    }
+
+    .split-footer span {
+      background: none;
+      -webkit-text-fill-color: #5a5856;
+      color: #5a5856;
+    }
+
+    .panel-content {
+      max-width: 100%;
       text-align: center;
     }
-    
-    .hero-logo {
-      order: -1;
-      margin: 0 auto;
-    }
-    
-    .hero-subtitle {
+
+    .panel-desc {
+      max-width: 100%;
       margin-left: auto;
       margin-right: auto;
     }
-    
-    .hero-scroll {
-      display: none;
+
+    .split-panel {
+      padding: var(--space-xl) var(--space-lg);
+      min-height: 50vh;
     }
-  }
-  
-  /* Philosophy Section */
-  .philosophy {
-    padding-top: var(--space-2xl);
-    padding-bottom: var(--space-2xl);
-  }
-  
-  .philosophy-content p {
-    font-size: 1.1rem;
-  }
-  
-  /* Featured Section */
-  .featured {
-    padding-top: var(--space-xl);
-    padding-bottom: var(--space-2xl);
-  }
-  
-  .featured-article {
-    max-width: 800px;
-    margin: 0 auto;
-    background: var(--paper-aged);
-    border: 1px solid var(--ink-faded);
-    padding: var(--space-xl);
-    position: relative;
-  }
-  
-  .featured-article::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: -10px;
-    bottom: -10px;
-    border: 1px solid var(--ink-faded);
-    z-index: -1;
-  }
-  
-  .featured-header {
-    text-align: center;
-    margin-bottom: var(--space-lg);
-    padding-bottom: var(--space-lg);
-    border-bottom: 1px solid var(--ink-faded);
-  }
-  
-  .featured-label {
-    display: inline-block;
-    font-family: var(--font-serif);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--ink-faded);
-    margin-bottom: var(--space-sm);
-  }
-  
-  .featured-title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    margin-bottom: var(--space-sm);
-  }
-  
-  .featured-body {
-    text-align: center;
-  }
-  
-  .featured-body p {
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: var(--space-lg);
-  }
-  
-  /* CTA Section */
-  .cta {
-    padding-top: var(--space-xl);
-    padding-bottom: var(--space-2xl);
-  }
-  
-  .cta-inner {
-    text-align: center;
-  }
-  
-  .cta-text {
-    font-family: var(--font-serif);
-    font-size: 1.25rem;
-    margin-bottom: var(--space-lg);
-    color: var(--ink-light);
   }
 </style>

@@ -1,0 +1,229 @@
+---
+import WebLayout from '../../layouts/WebLayout.astro';
+---
+
+<WebLayout title="Work" description="Web development projects by Quiet Atlas — calm, deliberately crafted websites built to last.">
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <span class="section-label fade-in">Portfolio</span>
+      <h1 class="fade-in">Work we're proud of.</h1>
+      <p class="page-intro fade-in">
+        Every project represents a partnership built on trust. We build for businesses
+        that care about quality and longevity over flash.
+      </p>
+    </div>
+  </section>
+
+  <!-- Projects Grid -->
+  <section class="projects container">
+    <div class="projects-grid stagger-children">
+      <!-- Sunny Nails Spa -->
+      <article class="project-card">
+        <div class="project-visual">
+          <div class="project-placeholder">
+            <span class="project-initials">SN</span>
+          </div>
+          <span class="project-status">In Deployment</span>
+        </div>
+        <div class="project-info">
+          <h2>Sunny Nails Spa</h2>
+          <p class="project-type">Local Business Website</p>
+          <p class="project-desc">
+            A warm, inviting web presence for a nail spa that wanted something as
+            welcoming as their physical space. Built with static architecture for
+            speed and reliability — zero maintenance burden for the business owner.
+          </p>
+          <div class="project-tech">
+            <span>Astro</span>
+            <span>TinaCMS</span>
+            <span>Cloudflare</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Placeholder for future work -->
+      <article class="project-card project-upcoming">
+        <div class="project-visual">
+          <div class="project-placeholder upcoming">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 8v4l3 3" />
+            </svg>
+          </div>
+        </div>
+        <div class="project-info">
+          <h2>Your Project?</h2>
+          <p class="project-type">We're taking on new work</p>
+          <p class="project-desc">
+            We work with a small number of clients at a time to ensure every project
+            gets the attention it deserves. If you value quality over quantity, we
+            should talk.
+          </p>
+          <a href="/web/contact" class="btn">Start a Conversation</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Approach -->
+  <section class="approach container">
+    <div class="approach-inner content-width fade-in">
+      <hr class="ornamental" />
+      <p class="approach-text">
+        We don't showcase volume — we showcase care. Every project in our portfolio
+        represents a relationship, not a transaction. If you'd like to be here,
+        <a href="/web/contact">let's start talking</a>.
+      </p>
+    </div>
+  </section>
+</WebLayout>
+
+<style>
+  /* ─── Page Header ─── */
+  .page-header {
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
+
+  .page-header h1 {
+    margin-top: var(--space-md);
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    line-height: 1.1;
+  }
+
+  .page-intro {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  /* ─── Projects Grid ─── */
+  .projects {
+    padding-bottom: var(--space-2xl);
+  }
+
+  .projects-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .project-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    transition: all var(--duration-normal) var(--ease-gentle);
+  }
+
+  .project-card:hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* ─── Project Visual ─── */
+  .project-visual {
+    position: relative;
+  }
+
+  .project-placeholder {
+    width: 100%;
+    aspect-ratio: 16/10;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .project-initials {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: -0.02em;
+  }
+
+  .project-placeholder.upcoming {
+    border-style: dashed;
+    color: var(--text-muted);
+  }
+
+  .project-status {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    background: var(--bg-elevated);
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--accent-subtle);
+  }
+
+  /* ─── Project Info ─── */
+  .project-info h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .project-type {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: var(--space-md);
+  }
+
+  .project-desc {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .project-tech {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin-top: var(--space-md);
+  }
+
+  .project-tech span {
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 0.2rem 0.6rem;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .project-card {
+      grid-template-columns: 1fr;
+    }
+    .project-visual {
+      order: -1;
+    }
+  }
+
+  /* ─── Approach ─── */
+  .approach {
+    padding: 0 0 var(--space-2xl);
+  }
+
+  .approach-text {
+    text-align: center;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+  }
+</style>

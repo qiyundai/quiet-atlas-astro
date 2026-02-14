@@ -1,0 +1,257 @@
+---
+import WebLayout from '../../layouts/WebLayout.astro';
+---
+
+<WebLayout title="Process" description="How Quiet Atlas builds websites — from discovery through design, development, launch, and ongoing maintenance.">
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <span class="section-label fade-in">How We Work</span>
+      <h1 class="fade-in">Simple process. Solid results.</h1>
+      <p class="page-intro fade-in">
+        We follow a straightforward process designed to respect your time
+        and produce work that lasts. No surprises, no scope creep, no jargon.
+      </p>
+    </div>
+  </section>
+
+  <!-- Process Steps -->
+  <section class="process container">
+    <div class="process-steps">
+      <article class="step fade-in">
+        <div class="step-marker">
+          <span class="step-number">01</span>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h2>Discovery</h2>
+          <p>
+            We start with a conversation. What does your business need? Who are your
+            visitors? What matters most to you? We listen carefully before proposing
+            anything.
+          </p>
+          <div class="step-details">
+            <span>Initial consultation</span>
+            <span>Requirements gathering</span>
+            <span>Scope definition</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="step fade-in">
+        <div class="step-marker">
+          <span class="step-number">02</span>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h2>Design</h2>
+          <p>
+            We craft the visual direction and information architecture. Clean layouts,
+            clear hierarchy, and a design system that makes sense for your content.
+            You see and approve everything before we write a line of code.
+          </p>
+          <div class="step-details">
+            <span>Wireframes</span>
+            <span>Visual design</span>
+            <span>Content structure</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="step fade-in">
+        <div class="step-marker">
+          <span class="step-number">03</span>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h2>Build</h2>
+          <p>
+            We develop your site using Astro, producing static HTML that loads instantly.
+            Content management goes through TinaCMS — a visual editor backed by Git.
+            Everything is version-controlled from day one.
+          </p>
+          <div class="step-details">
+            <span>Astro development</span>
+            <span>TinaCMS integration</span>
+            <span>Responsive implementation</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="step fade-in">
+        <div class="step-marker">
+          <span class="step-number">04</span>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h2>Launch</h2>
+          <p>
+            Your site deploys to Cloudflare Pages — served from the edge, globally.
+            We handle DNS, SSL, and deployment pipelines. You push content to Git,
+            and it's live in seconds.
+          </p>
+          <div class="step-details">
+            <span>Cloudflare deployment</span>
+            <span>Performance optimization</span>
+            <span>Launch checklist</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="step fade-in">
+        <div class="step-marker">
+          <span class="step-number">05</span>
+        </div>
+        <div class="step-content">
+          <h2>Maintain</h2>
+          <p>
+            After launch, your site keeps working without drama. We offer maintenance
+            tiers for ongoing support — from occasional check-ins to proactive
+            monitoring and content updates.
+          </p>
+          <div class="step-details">
+            <span>Health monitoring</span>
+            <span>Content support</span>
+            <span>Quarterly reports</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta container">
+    <div class="cta-inner fade-in">
+      <h2>Ready to start?</h2>
+      <p>The first step is always a conversation. Tell us about your project.</p>
+      <a href="/web/contact" class="btn btn-primary btn-large">Get in Touch</a>
+    </div>
+  </section>
+</WebLayout>
+
+<style>
+  /* ─── Page Header ─── */
+  .page-header {
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
+
+  .page-header h1 {
+    margin-top: var(--space-md);
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    line-height: 1.1;
+  }
+
+  .page-intro {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  /* ─── Process Steps ─── */
+  .process {
+    padding-bottom: var(--space-2xl);
+  }
+
+  .process-steps {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: var(--space-lg);
+    padding-bottom: var(--space-xl);
+  }
+
+  .step-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .step-number {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .step-line {
+    width: 1px;
+    flex: 1;
+    background: var(--border);
+    margin-top: var(--space-sm);
+  }
+
+  .step-content h2 {
+    font-size: 1.35rem;
+    margin-bottom: var(--space-sm);
+    margin-top: 0.4rem;
+  }
+
+  .step-content p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .step-details {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin-top: var(--space-md);
+  }
+
+  .step-details span {
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 0.25rem 0.65rem;
+    background: var(--accent-subtle);
+    color: var(--accent);
+    border-radius: var(--radius-sm);
+  }
+
+  @media (max-width: 768px) {
+    .step {
+      grid-template-columns: 40px 1fr;
+      gap: var(--space-md);
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      font-size: 0.75rem;
+    }
+  }
+
+  /* ─── CTA ─── */
+  .cta {
+    padding: var(--space-xl) 0 var(--space-2xl);
+  }
+
+  .cta-inner {
+    text-align: center;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .cta-inner h2 {
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    margin-bottom: var(--space-sm);
+  }
+
+  .cta-inner p {
+    margin-bottom: var(--space-lg);
+  }
+</style>

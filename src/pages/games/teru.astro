@@ -1,0 +1,262 @@
+---
+import GamesLayout from '../../layouts/GamesLayout.astro';
+---
+
+<GamesLayout title="Teru" description="Teru — a contemplative puzzle game by Quiet Atlas. Guide light through paper lanterns in a hand-painted world.">
+  <!-- Hero -->
+  <section class="game-hero">
+    <div class="game-hero-visual teru-bg">
+      <div class="game-hero-overlay"></div>
+      <div class="game-hero-content container fade-in">
+        <span class="game-hero-label">Contemplative Puzzle</span>
+        <h1 class="game-hero-title">Teru</h1>
+        <p class="game-hero-tagline">Every puzzle is a meditation. Every solution, a breath out.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="game-about container">
+    <div class="content-width">
+      <div class="game-lead fade-in">
+        <p class="lead-text">
+          Teru is a puzzle game about light and patience. You guide soft
+          illumination through hand-painted paper lanterns, connecting pathways
+          that glow when they find their match. There are no timers, no
+          leaderboards — just you, the light, and the gentle satisfaction
+          of seeing something beautiful click into place.
+        </p>
+      </div>
+
+      <div class="pull-quote fade-in">
+        "The light doesn't rush. Neither should you."
+      </div>
+
+      <div class="game-details fade-in">
+        <h2>The Craft</h2>
+        <p>
+          Every level in Teru was painted by hand before being brought into the game.
+          Watercolor textures, ink washes, and paper grain give each puzzle a
+          warmth that digital precision alone can't achieve. The imperfections
+          are the point — they remind you that this was made by someone who cared.
+        </p>
+        <p>
+          The puzzle mechanics are deceptively simple. Connect lanterns. Guide light.
+          But as the world grows, so does the complexity — not through difficulty
+          spikes, but through gentle layers of understanding. You'll find yourself
+          thinking differently about space, about connection, about what it means
+          for things to illuminate each other.
+        </p>
+      </div>
+
+      <div class="game-features stagger-children">
+        <div class="feature-card card">
+          <h3>Hand-Painted Art</h3>
+          <p>Every texture started as watercolor on paper. Imperfect, warm, and intentional.</p>
+        </div>
+        <div class="feature-card card">
+          <h3>No Pressure</h3>
+          <p>No timers. No scores. No wrong answers. Just you and the light.</p>
+        </div>
+        <div class="feature-card card">
+          <h3>Layered Depth</h3>
+          <p>Simple mechanics that reveal surprising complexity through gentle progression.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info -->
+  <section class="game-info container">
+    <div class="info-grid fade-in">
+      <div class="info-block">
+        <h3>Status</h3>
+        <p>In Development</p>
+      </div>
+      <div class="info-block">
+        <h3>Genre</h3>
+        <p>Contemplative Puzzle</p>
+      </div>
+      <div class="info-block">
+        <h3>Platform</h3>
+        <p>PC / Mac / Mobile</p>
+      </div>
+      <div class="info-block">
+        <h3>Art Style</h3>
+        <p>Hand-painted Watercolor</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta container">
+    <div class="cta-inner fade-in">
+      <hr class="ornamental" />
+      <p class="cta-text">Teru is being carefully folded into existence. We'll share more when the light is ready.</p>
+      <a href="https://quietatlas.itch.io/" target="_blank" rel="noopener noreferrer" class="btn btn-large">Follow on itch.io</a>
+    </div>
+  </section>
+</GamesLayout>
+
+<style>
+  /* ─── Game Hero ─── */
+  .game-hero {
+    margin-top: calc(-1 * var(--nav-height));
+  }
+
+  .game-hero-visual {
+    min-height: 60vh;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
+
+  .teru-bg {
+    background: linear-gradient(160deg, #0f0a1a 0%, #1a0f2e 30%, #2d1b4e 60%, #4a1942 100%);
+  }
+
+  .game-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(8, 8, 12, 0.3) 0%, rgba(8, 8, 12, 0.9) 100%);
+  }
+
+  .game-hero-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .game-hero-label {
+    display: inline-block;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-bottom: var(--space-md);
+  }
+
+  .game-hero-title {
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: var(--space-md);
+  }
+
+  .game-hero-tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin: 0;
+  }
+
+  /* ─── Game About ─── */
+  .game-about {
+    padding: var(--space-2xl) 0;
+  }
+
+  .lead-text {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  .game-details {
+    margin-top: var(--space-xl);
+  }
+
+  .game-details h2 {
+    font-size: 1.75rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .game-details p {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  /* ─── Features ─── */
+  .game-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+  }
+
+  .feature-card h3 {
+    font-size: 1rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .feature-card p {
+    font-family: var(--font-serif);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .game-features {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ─── Info Grid ─── */
+  .game-info {
+    padding: var(--space-xl) 0;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+  }
+
+  .info-block h3 {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-xs);
+  }
+
+  .info-block p {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    color: var(--text);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .info-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* ─── CTA ─── */
+  .cta {
+    padding: var(--space-xl) 0 var(--space-2xl);
+  }
+
+  .cta-inner {
+    text-align: center;
+  }
+
+  .cta-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+  }
+</style>

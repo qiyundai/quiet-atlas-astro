@@ -2,7 +2,7 @@
   "name": "quiet-atlas",
   "type": "module",
   "version": "1.0.0",
-  "description": "Quiet Atlas - An indie label for healing-oriented, contemplative games",
+  "description": "Quiet Atlas - A calm, deliberate studio with two creative outputs: web development and indie games",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

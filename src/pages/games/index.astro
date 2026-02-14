@@ -1,0 +1,316 @@
+---
+import GamesLayout from '../../layouts/GamesLayout.astro';
+---
+
+<GamesLayout title="Home" description="Quiet Atlas creates healing-oriented, contemplative indie games. Games that breathe.">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner container">
+      <div class="hero-content fade-in">
+        <span class="hero-label">Indie Game Studio</span>
+        <h1 class="hero-title">Games that breathe.</h1>
+        <p class="hero-desc">
+          We make games for the moments when you need to feel held by something gentle.
+          Not escape — rest. Not challenge — wonder.
+        </p>
+        <div class="hero-actions">
+          <a href="https://quietatlas.itch.io/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
+            Visit us on itch.io
+          </a>
+          <a href="/games/about" class="btn btn-large">Our Story</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-fade"></div>
+  </section>
+
+  <!-- Games Showcase -->
+  <section class="showcase container">
+    <div class="section-header">
+      <span>Our Games</span>
+    </div>
+
+    <div class="games-grid stagger-children">
+      <!-- Vestige -->
+      <a href="/games/vestige" class="game-card">
+        <div class="game-visual">
+          <div class="game-placeholder vestige-bg">
+            <span class="game-glyph">V</span>
+          </div>
+        </div>
+        <div class="game-info">
+          <h2>Vestige</h2>
+          <p class="game-genre">Atmospheric Exploration</p>
+          <p class="game-blurb">
+            Walk through the remnants of a world that remembers you, even when you've forgotten it.
+            A quiet journey through fading landscapes and lingering echoes.
+          </p>
+          <span class="game-link">
+            Learn more
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- Teru -->
+      <a href="/games/teru" class="game-card">
+        <div class="game-visual">
+          <div class="game-placeholder teru-bg">
+            <span class="game-glyph">T</span>
+          </div>
+        </div>
+        <div class="game-info">
+          <h2>Teru</h2>
+          <p class="game-genre">Contemplative Puzzle</p>
+          <p class="game-blurb">
+            Guide light through paper lanterns in a hand-painted world where
+            every puzzle is a meditation and every solution feels like breathing out.
+          </p>
+          <span class="game-link">
+            Learn more
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Philosophy -->
+  <section class="philosophy container">
+    <div class="philosophy-inner content-width">
+      <div class="pull-quote fade-in">
+        "A place that helps people remember how to be soft."
+      </div>
+
+      <div class="philosophy-text fade-in">
+        <p>
+          Quiet Atlas games are gentle but not shallow. Emotionally sincere without
+          being melodramatic. We treat childlike belief with adult respect — because
+          wonder doesn't need to be outgrown.
+        </p>
+        <p>
+          Low UI. Low friction. High atmosphere.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta container">
+    <div class="cta-inner fade-in">
+      <hr class="ornamental" />
+      <p class="cta-text">Follow our journey. New stories are always being drawn.</p>
+      <a href="https://quietatlas.itch.io/" target="_blank" rel="noopener noreferrer" class="btn btn-large">
+        itch.io
+      </a>
+    </div>
+  </section>
+</GamesLayout>
+
+<style>
+  /* ─── Hero ─── */
+  .hero {
+    padding: var(--space-2xl) 0;
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-content {
+    max-width: 680px;
+  }
+
+  .hero-label {
+    display: inline-block;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-bottom: var(--space-md);
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    margin-bottom: var(--space-lg);
+    background: linear-gradient(135deg, var(--text) 0%, var(--text-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-desc {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    max-width: 520px;
+    margin-bottom: var(--space-xl);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .hero-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, var(--bg));
+    pointer-events: none;
+  }
+
+  /* ─── Games Showcase ─── */
+  .showcase {
+    padding: var(--space-xl) 0 var(--space-2xl);
+  }
+
+  .games-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .game-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+    text-decoration: none;
+    color: var(--text);
+    padding: var(--space-lg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--bg-alt);
+    transition: all var(--duration-normal) var(--ease-gentle);
+  }
+
+  .game-card:hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+
+  .game-card:nth-child(even) {
+    direction: rtl;
+  }
+
+  .game-card:nth-child(even) > * {
+    direction: ltr;
+  }
+
+  /* Game Visual Placeholders */
+  .game-placeholder {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .vestige-bg {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  }
+
+  .teru-bg {
+    background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 50%, #4a1942 100%);
+  }
+
+  .game-glyph {
+    font-family: var(--font-display);
+    font-size: 4rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.08);
+    letter-spacing: -0.04em;
+  }
+
+  .game-info h2 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    margin-bottom: var(--space-xs);
+  }
+
+  .game-genre {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--accent);
+    margin-bottom: var(--space-md);
+  }
+
+  .game-blurb {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .game-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-top: var(--space-md);
+    transition: gap var(--duration-normal) var(--ease-gentle);
+  }
+
+  .game-card:hover .game-link {
+    gap: 0.7rem;
+  }
+
+  @media (max-width: 768px) {
+    .game-card,
+    .game-card:nth-child(even) {
+      grid-template-columns: 1fr;
+      direction: ltr;
+    }
+  }
+
+  /* ─── Philosophy ─── */
+  .philosophy {
+    padding: var(--space-xl) 0;
+  }
+
+  .philosophy-text {
+    text-align: center;
+  }
+
+  .philosophy-text p {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  /* ─── CTA ─── */
+  .cta {
+    padding: var(--space-xl) 0 var(--space-2xl);
+  }
+
+  .cta-inner {
+    text-align: center;
+  }
+
+  .cta-text {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+  }
+</style>

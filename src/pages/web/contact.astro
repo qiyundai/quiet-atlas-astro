@@ -1,0 +1,225 @@
+---
+import WebLayout from '../../layouts/WebLayout.astro';
+---
+
+<WebLayout title="Contact" description="Get in touch with Quiet Atlas for your web development project. We'd love to hear from you.">
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <span class="section-label fade-in">Get in Touch</span>
+      <h1 class="fade-in">Let's build something together.</h1>
+      <p class="page-intro fade-in">
+        Whether you have a clear vision or just an idea, we'd love to hear about it.
+        No pressure, no jargon — just a conversation about what you need.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Content -->
+  <section class="contact container">
+    <div class="contact-grid">
+      <!-- Contact Info -->
+      <div class="contact-info fade-in">
+        <div class="info-card card">
+          <div class="info-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 5H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Z"/>
+              <path d="m3 7 9 6 9-6"/>
+            </svg>
+          </div>
+          <h3>Email Us</h3>
+          <p>For project inquiries and questions.</p>
+          <p class="info-detail">hello@quietatlas.io</p>
+        </div>
+
+        <div class="info-card card">
+          <div class="info-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+          </div>
+          <h3>Location</h3>
+          <p>Based in Ontario, Canada.</p>
+          <p class="info-detail">Working remotely with clients everywhere.</p>
+        </div>
+
+        <div class="info-card card">
+          <div class="info-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 6v6l4 2" />
+            </svg>
+          </div>
+          <h3>Response Time</h3>
+          <p>We aim to respond within 24 hours.</p>
+          <p class="info-detail">Usually sooner.</p>
+        </div>
+      </div>
+
+      <!-- Contact Form Placeholder -->
+      <div class="contact-form fade-in">
+        <div class="form-card card">
+          <h2>Send us a message</h2>
+          <p class="form-note">Tell us about your project and we'll get back to you promptly.</p>
+
+          <form class="form" action="#" method="POST">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required />
+            </div>
+
+            <div class="form-group">
+              <label for="project">Tell us about your project</label>
+              <textarea id="project" name="project" rows="5" placeholder="What are you looking to build? Any timeline or budget in mind?"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-large form-submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</WebLayout>
+
+<style>
+  /* ─── Page Header ─── */
+  .page-header {
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
+
+  .page-header h1 {
+    margin-top: var(--space-md);
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    line-height: 1.1;
+  }
+
+  .page-intro {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  /* ─── Contact Grid ─── */
+  .contact {
+    padding-bottom: var(--space-2xl);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ─── Info Cards ─── */
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .info-card {
+    padding: var(--space-lg);
+  }
+
+  .info-icon {
+    color: var(--accent);
+    margin-bottom: var(--space-sm);
+  }
+
+  .info-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .info-card p {
+    font-size: 0.88rem;
+    margin-bottom: 0;
+    color: var(--text-secondary);
+  }
+
+  .info-detail {
+    font-weight: 500;
+    color: var(--text) !important;
+    margin-top: var(--space-xs) !important;
+  }
+
+  /* ─── Form ─── */
+  .form-card {
+    padding: var(--space-xl);
+  }
+
+  .form-card h2 {
+    font-size: 1.35rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .form-note {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .form-group label {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    color: var(--text);
+    transition: border-color var(--duration-fast) var(--ease-gentle);
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--accent);
+    outline: none;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: var(--text-muted);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .form-submit {
+    width: 100%;
+    margin-top: var(--space-sm);
+  }
+</style>
