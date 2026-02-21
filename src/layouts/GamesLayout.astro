@@ -23,6 +23,8 @@ const currentPath = Astro.url.pathname;
         <li><a href="/games" class:list={[{ active: currentPath === '/games' || currentPath === '/games/' }]}>Home</a></li>
         <li><a href="/games/vestige" class:list={[{ active: currentPath.startsWith('/games/vestige') }]}>Vestige</a></li>
         <li><a href="/games/teru" class:list={[{ active: currentPath.startsWith('/games/teru') }]}>Teru</a></li>
+        <li><a href="/games/bullet-well" class:list={[{ active: currentPath.startsWith('/games/bullet-well') }]}>Bullet Well</a></li>
+        <li><a href="/games/somewhere" class:list={[{ active: currentPath.startsWith('/games/somewhere') }]}>Somewhere</a></li>
         <li><a href="/games/about" class:list={[{ active: currentPath.startsWith('/games/about') }]}>About</a></li>
       </ul>
 
@@ -40,6 +42,8 @@ const currentPath = Astro.url.pathname;
       <li><a href="/games">Home</a></li>
       <li><a href="/games/vestige">Vestige</a></li>
       <li><a href="/games/teru">Teru</a></li>
+      <li><a href="/games/bullet-well">Bullet Well</a></li>
+      <li><a href="/games/somewhere">Somewhere</a></li>
       <li><a href="/games/about">About</a></li>
     </ul>
   </div>
@@ -64,6 +68,8 @@ const currentPath = Astro.url.pathname;
         <nav class="footer-nav" aria-label="Footer navigation">
           <a href="/games/vestige">Vestige</a>
           <a href="/games/teru">Teru</a>
+          <a href="/games/bullet-well">Bullet Well</a>
+          <a href="/games/somewhere">Somewhere</a>
           <a href="/games/about">About</a>
           <a href="https://quietatlas.itch.io/" target="_blank" rel="noopener noreferrer">itch.io</a>
         </nav>

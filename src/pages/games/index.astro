@@ -2,7 +2,7 @@
 import GamesLayout from '../../layouts/GamesLayout.astro';
 ---
 
-<GamesLayout title="Home" description="Quiet Atlas creates healing-oriented, contemplative indie games. Games that breathe.">
+<GamesLayout title="Home" description="Quiet Atlas builds atmospheric games about memory, healing, tension, and belonging. Indie games with soul.">
   <!-- Hero -->
   <section class="hero">
     <div class="hero-inner container">
@@ -10,8 +10,8 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
         <span class="hero-label">Indie Game Studio</span>
         <h1 class="hero-title">Games that breathe.</h1>
         <p class="hero-desc">
-          We make games for the moments when you need to feel held by something gentle.
-          Not escape — rest. Not challenge — wonder.
+          We make games about memory, healing, tension, and belonging — what it means
+          to rebuild oneself and one's world. Atmosphere over spectacle. Reflection over rush.
         </p>
         <div class="hero-actions">
           <a href="https://quietatlas.itch.io/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
@@ -40,10 +40,11 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
         </div>
         <div class="game-info">
           <h2>Vestige</h2>
-          <p class="game-genre">Atmospheric Exploration</p>
+          <p class="game-genre">Narrative Metroidvania · Psychological · Atmospheric</p>
           <p class="game-blurb">
-            Walk through the remnants of a world that remembers you, even when you've forgotten it.
-            A quiet journey through fading landscapes and lingering echoes.
+            Explore the architecture of a damaged mind. After erasing his memories, neuroscientist
+            Elias Noe lies in a coma — you inhabit his fractured consciousness. Confront grief,
+            navigate identity, and face what the mind tried to bury.
           </p>
           <span class="game-link">
             Learn more
@@ -61,10 +62,54 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
         </div>
         <div class="game-info">
           <h2>Teru</h2>
-          <p class="game-genre">Contemplative Puzzle</p>
+          <p class="game-genre">Emotional 3D Platformer · Environmental Restoration</p>
           <p class="game-blurb">
-            Guide light through paper lanterns in a hand-painted world where
-            every puzzle is a meditation and every solution feels like breathing out.
+            Two celestial weather caretakers restore balance by delivering teru teru bōzu to
+            communities below. Sun Girl brings sunshine; Rain Boy brings rain. Healing through
+            service, quiet compassion, and one hidden redemption.
+          </p>
+          <span class="game-link">
+            Learn more
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- Bullet Well -->
+      <a href="/games/bullet-well" class="game-card">
+        <div class="game-visual">
+          <div class="game-placeholder bullet-well-bg">
+            <span class="game-glyph">B</span>
+          </div>
+        </div>
+        <div class="game-info">
+          <h2>Bullet Well</h2>
+          <p class="game-genre">Physics Platformer · Emergent Challenge</p>
+          <p class="game-blurb">
+            Climb a seemingly endless well while bullets ricochet violently between its walls.
+            Your own shots create danger. Tension, mastery through repetition, chaos within
+            predictable physics. Your weapon becomes the level design.
+          </p>
+          <span class="game-link">
+            Learn more
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- My Own Piece of Somewhere -->
+      <a href="/games/somewhere" class="game-card">
+        <div class="game-visual">
+          <div class="game-placeholder somewhere-bg">
+            <span class="game-glyph">S</span>
+          </div>
+        </div>
+        <div class="game-info">
+          <h2>My Own Piece of Somewhere</h2>
+          <p class="game-genre">Cozy Life Sim + City Builder · Belonging</p>
+          <p class="game-blurb">
+            Build a small town inspired by global cultural styles — then live inside it in first person.
+            You're not the mayor. You're a resident seeking belonging. No grind. No pressure. Only presence.
           </p>
           <span class="game-link">
             Learn more
@@ -79,14 +124,14 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
   <section class="philosophy container">
     <div class="philosophy-inner content-width">
       <div class="pull-quote fade-in">
-        "A place that helps people remember how to be soft."
+        "Environmental storytelling. Emotional gameplay. Atmosphere over spectacle."
       </div>
 
       <div class="philosophy-text fade-in">
         <p>
-          Quiet Atlas games are gentle but not shallow. Emotionally sincere without
-          being melodramatic. We treat childlike belief with adult respect — because
-          wonder doesn't need to be outgrown.
+          Every Quiet Atlas game shares the same DNA: reflective experiences, systems that
+          reinforce theme, and worlds that tell the story. From confronting grief to finding
+          belonging — we build games for the moments when you need to feel held by something real.
         </p>
         <p>
           Low UI. Low friction. High atmosphere.
@@ -228,6 +273,14 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
 
   .teru-bg {
     background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 50%, #4a1942 100%);
+  }
+
+  .bullet-well-bg {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a0a0a 100%);
+  }
+
+  .somewhere-bg {
+    background: linear-gradient(135deg, #0f2e1a 0%, #1a3d2d 50%, #1a2e0f 100%);
   }
 
   .game-glyph {

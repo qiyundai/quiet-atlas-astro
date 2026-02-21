@@ -2,15 +2,15 @@
 import GamesLayout from '../../layouts/GamesLayout.astro';
 ---
 
-<GamesLayout title="Vestige" description="Vestige — a narrative metroidvania by Quiet Atlas. Explore the architecture of a damaged mind. Confront grief, identity, and what the mind tried to bury.">
+<GamesLayout title="Bullet Well" description="Bullet Well — a physics platformer by Quiet Atlas. Climb an endless well while bullets ricochet. Your weapon becomes the level design.">
   <!-- Hero -->
   <section class="game-hero">
-    <div class="game-hero-visual vestige-bg">
+    <div class="game-hero-visual bullet-well-bg">
       <div class="game-hero-overlay"></div>
       <div class="game-hero-content container fade-in">
-        <span class="game-hero-label">Narrative Metroidvania · Psychological · Atmospheric</span>
-        <h1 class="game-hero-title">Vestige</h1>
-        <p class="game-hero-tagline">Explore the architecture of a damaged mind.</p>
+        <span class="game-hero-label">Physics Platformer · Emergent Challenge</span>
+        <h1 class="game-hero-title">Bullet Well</h1>
+        <p class="game-hero-tagline">Your own shots create danger.</p>
       </div>
     </div>
   </section>
@@ -20,56 +20,55 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
     <div class="content-width">
       <div class="game-lead fade-in">
         <p class="lead-text">
-          After a catastrophic personal history and the loss of his children, neuroscientist
-          <strong>Elias Noe</strong> uses experimental technology to erase his memories. The player
-          inhabits his fractured consciousness while his body lies in a coma. You explore the
-          architecture of a damaged mind — not as a tourist, but as the one who must face what
-          was buried.
+          The player climbs a seemingly endless well while bullets ricochet violently between
+          its walls. Your own shots create danger. Minimal systems, maximal emergent gameplay —
+          tension, mastery through repetition, chaos within predictable physics. Fast failure,
+          fast retry.
         </p>
       </div>
 
       <div class="pull-quote fade-in">
-        "Vestige is not about defeating enemies. It is about confronting grief, navigating fractured identity, and rebuilding meaning from fragments."
+        "Your weapon becomes the level design."
       </div>
 
       <div class="game-details fade-in">
-        <h2>Emotional Experience</h2>
+        <h2>Core Mechanics</h2>
         <p>
-          Vestige is about confronting grief, navigating fractured identity, rebuilding meaning
-          from fragments, and facing what the mind tried to bury. Progression is emotional
-          integration — a metroidvania where the real unlock is acceptance.
+          <strong>Physics-based ricochet</strong> — Bullets bounce multiple times, creating emergent
+          hazards. Every shot shapes the space you're climbing through.
         </p>
-
-        <h2>World Design</h2>
         <p>
-          The world represents neurological and emotional states: decaying memory corridors,
-          collapsing cognitive structures, authoritarian memory fragments, neural pathways as
-          traversal routes, and subconscious defensive entities. The environment tells the story.
+          <strong>Vertical progression</strong> — Upward escape creates urgency and pressure. The well
+          keeps going; so do you.
+        </p>
+        <p>
+          <strong>Death conditions</strong> — Bullet impact, or falling below the visible space. Clean
+          rules, sharp stakes.
         </p>
       </div>
 
       <div class="game-features stagger-children">
         <div class="feature-card card">
-          <h3>Memory Fragmentation</h3>
-          <p>Abilities unlock access to previously unreachable mental regions. Progress through the mind, not just the map.</p>
+          <h3>Emergent Chaos</h3>
+          <p>Ricochets create patterns you didn't plan. Predictable physics, unpredictable moments.</p>
         </div>
         <div class="feature-card card">
-          <h3>Rewind — Regret Essence</h3>
-          <p>Rewind to a past state: first position, then health, then debuffs, then offensive effects and singularity pulls. Revisiting trauma, in mechanic form.</p>
+          <h3>Fast Retry</h3>
+          <p>Death is quick. Restart is quicker. Mastery through repetition, not punishment.</p>
         </div>
         <div class="feature-card card">
-          <h3>Weapon System — Stages of Grief</h3>
-          <p>Each weapon embodies a psychological state: denial, anger, bargaining, depression, acceptance. You learn emotional mastery through combat.</p>
+          <h3>Lean Scope</h3>
+          <p>Mechanics-first. No bloat. One well, one climb, one weapon — infinite permutations.</p>
         </div>
       </div>
 
       <div class="signature fade-in">
-        <p><strong>Signature identity:</strong> A metroidvania where progression is emotional integration.</p>
+        <p><strong>Signature identity:</strong> Minimal systems → maximal emergent gameplay.</p>
       </div>
     </div>
   </section>
 
-  <!-- Info Sidebar -->
+  <!-- Info -->
   <section class="game-info container">
     <div class="info-grid fade-in">
       <div class="info-block">
@@ -78,7 +77,7 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
       </div>
       <div class="info-block">
         <h3>Genre</h3>
-        <p>Narrative Metroidvania</p>
+        <p>Physics Platformer</p>
       </div>
       <div class="info-block">
         <h3>Platform</h3>
@@ -95,14 +94,13 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
   <section class="cta container">
     <div class="cta-inner fade-in">
       <hr class="ornamental" />
-      <p class="cta-text">Vestige is still being drawn. Follow us to walk with it when it's ready.</p>
+      <p class="cta-text">Bullet Well is in the well. Follow us for when it surfaces.</p>
       <a href="https://quietatlas.itch.io/" target="_blank" rel="noopener noreferrer" class="btn btn-large">Follow on itch.io</a>
     </div>
   </section>
 </GamesLayout>
 
 <style>
-  /* ─── Game Hero ─── */
   .game-hero {
     margin-top: calc(-1 * var(--nav-height));
   }
@@ -115,8 +113,8 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
     padding: var(--space-2xl) 0 var(--space-xl);
   }
 
-  .vestige-bg {
-    background: linear-gradient(160deg, #0a0a1a 0%, #0f1a2e 40%, #162340 70%, #0f3460 100%);
+  .bullet-well-bg {
+    background: linear-gradient(160deg, #0a0a0a 0%, #1a1a1a 40%, #2d1a1a 70%, #1a0a0a 100%);
   }
 
   .game-hero-overlay {
@@ -155,7 +153,6 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
     margin: 0;
   }
 
-  /* ─── Game About ─── */
   .game-about {
     padding: var(--space-2xl) 0;
   }
@@ -199,7 +196,6 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
     margin: 0;
   }
 
-  /* ─── Features ─── */
   .game-features {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -226,7 +222,6 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
     }
   }
 
-  /* ─── Info Grid ─── */
   .game-info {
     padding: var(--space-xl) 0;
   }
@@ -262,7 +257,6 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
     }
   }
 
-  /* ─── CTA ─── */
   .cta {
     padding: var(--space-xl) 0 var(--space-2xl);
   }

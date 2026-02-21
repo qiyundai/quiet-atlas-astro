@@ -2,15 +2,15 @@
 import GamesLayout from '../../layouts/GamesLayout.astro';
 ---
 
-<GamesLayout title="Teru" description="Teru — a contemplative puzzle game by Quiet Atlas. Guide light through paper lanterns in a hand-painted world.">
+<GamesLayout title="Teru" description="Teru — an emotional 3D platformer by Quiet Atlas. Two weather caretakers restore environmental balance. Healing through service and quiet compassion.">
   <!-- Hero -->
   <section class="game-hero">
     <div class="game-hero-visual teru-bg">
       <div class="game-hero-overlay"></div>
       <div class="game-hero-content container fade-in">
-        <span class="game-hero-label">Contemplative Puzzle</span>
+        <span class="game-hero-label">Emotional 3D Platformer · Environmental Restoration</span>
         <h1 class="game-hero-title">Teru</h1>
-        <p class="game-hero-tagline">Every puzzle is a meditation. Every solution, a breath out.</p>
+        <p class="game-hero-tagline">They do not fight the world. They restore it.</p>
       </div>
     </div>
   </section>
@@ -20,48 +20,60 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
     <div class="content-width">
       <div class="game-lead fade-in">
         <p class="lead-text">
-          Teru is a puzzle game about light and patience. You guide soft
-          illumination through hand-painted paper lanterns, connecting pathways
-          that glow when they find their match. There are no timers, no
-          leaderboards — just you, the light, and the gentle satisfaction
-          of seeing something beautiful click into place.
+          Two celestial weather caretakers restore environmental balance by delivering
+          <strong>teru teru bōzu</strong> to communities below. <strong>Sun Girl</strong> delivers
+          sunshine; <strong>Rain Boy</strong> delivers rain. They do not fight the world — they restore it.
         </p>
       </div>
 
       <div class="pull-quote fade-in">
-        "The light doesn't rush. Neither should you."
+        "Healing through service. Restoring balance. Processing grief through care."
       </div>
 
       <div class="game-details fade-in">
-        <h2>The Craft</h2>
+        <h2>Emotional Experience</h2>
         <p>
-          Every level in Teru was painted by hand before being brought into the game.
-          Watercolor textures, ink washes, and paper grain give each puzzle a
-          warmth that digital precision alone can't achieve. The imperfections
-          are the point — they remind you that this was made by someone who cared.
+          Teru explores healing through service, restoring balance, quiet compassion, processing
+          grief through care, and emotional growth through helping others. Weather delivery is
+          environmental care, not symbolism — the player serves communities.
+        </p>
+
+        <h2>Structure</h2>
+        <p>
+          <strong>Ark of Teru (Hub)</strong> — A floating sanctuary with sunny and rainy cloud mounds,
+          day/night cycle, memory exchange bridge, NPC caretakers, and quiet reflection space.
         </p>
         <p>
-          The puzzle mechanics are deceptively simple. Connect lanterns. Guide light.
-          But as the world grows, so does the complexity — not through difficulty
-          spikes, but through gentle layers of understanding. You'll find yourself
-          thinking differently about space, about connection, about what it means
-          for things to illuminate each other.
+          <strong>Levels</strong> — Nine levels per character, with increasing emotional weight and
+          grounded environmental needs: drought, growth, recovery.
+        </p>
+        <p>
+          <strong>Memory Collectibles</strong> — Each character gathers items belonging to the other.
+          Exchanging them unlocks emotional dialogues.
+        </p>
+        <p>
+          <strong>Hidden Redemption Level</strong> — After collecting all items, one tragedy can be
+          undone. Only one per playthrough. An emotional final scene.
         </p>
       </div>
 
       <div class="game-features stagger-children">
         <div class="feature-card card">
-          <h3>Hand-Painted Art</h3>
-          <p>Every texture started as watercolor on paper. Imperfect, warm, and intentional.</p>
+          <h3>Ark of Teru</h3>
+          <p>Floating hub with sun and rain, memory exchange, and space to breathe.</p>
         </div>
         <div class="feature-card card">
-          <h3>No Pressure</h3>
-          <p>No timers. No scores. No wrong answers. Just you and the light.</p>
+          <h3>Memory Exchange</h3>
+          <p>Collect items that belong to the other; exchange them for emotional dialogue.</p>
         </div>
         <div class="feature-card card">
-          <h3>Layered Depth</h3>
-          <p>Simple mechanics that reveal surprising complexity through gentle progression.</p>
+          <h3>One Redemption</h3>
+          <p>Complete the set and one tragedy can be undone — once per playthrough.</p>
         </div>
+      </div>
+
+      <div class="signature fade-in">
+        <p><strong>Signature identity:</strong> A platformer about restoring balance instead of conquering obstacles.</p>
       </div>
     </div>
   </section>
@@ -75,15 +87,15 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
       </div>
       <div class="info-block">
         <h3>Genre</h3>
-        <p>Contemplative Puzzle</p>
+        <p>Emotional 3D Platformer</p>
       </div>
       <div class="info-block">
         <h3>Platform</h3>
-        <p>PC / Mac / Mobile</p>
+        <p>PC / Mac</p>
       </div>
       <div class="info-block">
-        <h3>Art Style</h3>
-        <p>Hand-painted Watercolor</p>
+        <h3>Engine</h3>
+        <p>Godot</p>
       </div>
     </div>
   </section>
@@ -178,6 +190,22 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
     font-size: 1rem;
     line-height: 1.8;
     color: var(--text-secondary);
+  }
+
+  .signature {
+    margin-top: var(--space-xl);
+    padding: var(--space-md);
+    border-left: 3px solid var(--accent);
+    background: var(--bg-alt);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  .signature p {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin: 0;
   }
 
   /* ─── Features ─── */
