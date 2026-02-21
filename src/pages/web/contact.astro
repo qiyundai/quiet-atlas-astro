@@ -57,21 +57,23 @@ import WebLayout from '../../layouts/WebLayout.astro';
         </div>
       </div>
 
-      <!-- Contact Form Placeholder -->
+      <!-- Contact Form -->
       <div class="contact-form fade-in">
         <div class="form-card card">
           <h2>Send us a message</h2>
           <p class="form-note">Tell us about your project and we'll get back to you promptly.</p>
 
-          <form class="form" action="#" method="POST">
+          <div id="form-feedback" class="form-feedback" role="status" aria-live="polite" hidden></div>
+
+          <form id="contact-form" class="form" action="/api/contact" method="POST">
             <div class="form-group">
               <label for="name">Name</label>
-              <input type="text" id="name" name="name" placeholder="Your name" required />
+              <input type="text" id="name" name="name" placeholder="Your name" required autocomplete="name" />
             </div>
 
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="you@example.com" required />
+              <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email" />
             </div>
 
             <div class="form-group">
@@ -79,7 +81,7 @@ import WebLayout from '../../layouts/WebLayout.astro';
               <textarea id="project" name="project" rows="5" placeholder="What are you looking to build? Any timeline or budget in mind?"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-large form-submit">Send Message</button>
+            <button type="submit" class="btn btn-primary btn-large form-submit" id="form-submit-btn">Send Message</button>
           </form>
         </div>
       </div>
@@ -222,4 +224,74 @@ import WebLayout from '../../layouts/WebLayout.astro';
     width: 100%;
     margin-top: var(--space-sm);
   }
+
+  .form-submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .form-feedback {
+    margin-bottom: var(--space-md);
+    padding: var(--space-md);
+    border-radius: var(--radius-sm);
+    font-size: 0.92rem;
+  }
+
+  .form-feedback.success {
+    background: var(--accent-subtle);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+
+  .form-feedback.error {
+    background: rgba(180, 60, 60, 0.12);
+    color: #c95a5a;
+    border: 1px solid rgba(180, 60, 60, 0.4);
+  }
+
+  .form-feedback[hidden] {
+    display: none;
+  }
 </style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const feedback = document.getElementById('form-feedback') as HTMLDivElement | null;
+  const submitBtn = document.getElementById('form-submit-btn') as HTMLButtonElement | null;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!feedback || !submitBtn || !form) return;
+
+    feedback.hidden = true;
+    feedback.classList.remove('success', 'error');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    const formData = new FormData(form);
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.ok) {
+        feedback.textContent = "Thanks for reaching out. We'll get back to you soon.";
+        feedback.classList.add('success');
+        form.reset();
+      } else {
+        feedback.textContent = data.error ?? 'Something went wrong. Please try again or email us directly.';
+        feedback.classList.add('error');
+      }
+    } catch {
+      feedback.textContent = 'Network error. Please try again or email us directly.';
+      feedback.classList.add('error');
+    }
+
+    feedback.hidden = false;
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send Message';
+  });
+</script>
