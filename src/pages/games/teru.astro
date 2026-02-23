@@ -5,7 +5,7 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
 <GamesLayout title="Teru" description="Teru — an emotional 3D platformer by Quiet Atlas. Two weather caretakers restore environmental balance. Healing through service and quiet compassion.">
   <!-- Hero -->
   <section class="game-hero">
-    <div class="game-hero-visual teru-bg">
+    <div class="game-hero-visual game-hero-image teru-hero-bg">
       <div class="game-hero-overlay"></div>
       <div class="game-hero-content container fade-in">
         <span class="game-hero-label">Emotional 3D Platformer · Environmental Restoration</span>
@@ -124,8 +124,14 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
     padding: var(--space-2xl) 0 var(--space-xl);
   }
 
-  .teru-bg {
-    background: linear-gradient(160deg, #0f0a1a 0%, #1a0f2e 30%, #2d1b4e 60%, #4a1942 100%);
+  .game-hero-image {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .teru-hero-bg {
+    background-image: url('/images/games/teru-concept.png');
+    background-color: #0f0a1a;
   }
 
   .game-hero-overlay {

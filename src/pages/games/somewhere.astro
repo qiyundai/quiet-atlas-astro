@@ -5,7 +5,7 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
 <GamesLayout title="My Own Piece of Somewhere" description="My Own Piece of Somewhere — a cozy life sim and city builder by Quiet Atlas. Build a town, then learn to belong to it.">
   <!-- Hero -->
   <section class="game-hero">
-    <div class="game-hero-visual somewhere-bg">
+    <div class="game-hero-visual game-hero-image somewhere-hero-bg">
       <div class="game-hero-overlay"></div>
       <div class="game-hero-content container fade-in">
         <span class="game-hero-label">Cozy Life Sim + City Builder · Belonging</span>
@@ -123,8 +123,14 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
     padding: var(--space-2xl) 0 var(--space-xl);
   }
 
-  .somewhere-bg {
-    background: linear-gradient(160deg, #0a1a0f 0%, #0f2e1a 40%, #1a3d2d 70%, #1a2e0f 100%);
+  .game-hero-image {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .somewhere-hero-bg {
+    background-image: url('/images/games/somewhere-concept.png');
+    background-color: #0a1a0f;
   }
 
   .game-hero-overlay {

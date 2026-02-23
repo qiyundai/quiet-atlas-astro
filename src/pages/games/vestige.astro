@@ -5,7 +5,7 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
 <GamesLayout title="Vestige" description="Vestige — a narrative metroidvania by Quiet Atlas. Explore the architecture of a damaged mind. Confront grief, identity, and what the mind tried to bury.">
   <!-- Hero -->
   <section class="game-hero">
-    <div class="game-hero-visual vestige-bg">
+    <div class="game-hero-visual game-hero-image vestige-hero-bg">
       <div class="game-hero-overlay"></div>
       <div class="game-hero-content container fade-in">
         <span class="game-hero-label">Narrative Metroidvania · Psychological · Atmospheric</span>
@@ -115,8 +115,14 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
     padding: var(--space-2xl) 0 var(--space-xl);
   }
 
-  .vestige-bg {
-    background: linear-gradient(160deg, #0a0a1a 0%, #0f1a2e 40%, #162340 70%, #0f3460 100%);
+  .game-hero-image {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .vestige-hero-bg {
+    background-image: url('/images/games/vestige-concept.png');
+    background-color: #0a0a1a;
   }
 
   .game-hero-overlay {

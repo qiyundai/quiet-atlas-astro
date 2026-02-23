@@ -5,7 +5,7 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
 <GamesLayout title="Bullet Well" description="Bullet Well — a physics platformer by Quiet Atlas. Climb an endless well while bullets ricochet. Your weapon becomes the level design.">
   <!-- Hero -->
   <section class="game-hero">
-    <div class="game-hero-visual bullet-well-bg">
+    <div class="game-hero-visual game-hero-image bullet-well-hero-bg">
       <div class="game-hero-overlay"></div>
       <div class="game-hero-content container fade-in">
         <span class="game-hero-label">Physics Platformer · Emergent Challenge</span>
@@ -113,8 +113,14 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
     padding: var(--space-2xl) 0 var(--space-xl);
   }
 
-  .bullet-well-bg {
-    background: linear-gradient(160deg, #0a0a0a 0%, #1a1a1a 40%, #2d1a1a 70%, #1a0a0a 100%);
+  .game-hero-image {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .bullet-well-hero-bg {
+    background-image: url('/images/games/bullet-well-cover.png');
+    background-color: #0a0a0a;
   }
 
   .game-hero-overlay {
