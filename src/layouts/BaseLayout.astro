@@ -64,10 +64,16 @@ const seoTitle = facet === 'home'
       observer.observe(el);
     });
 
-    // Page transition — fade in
+    // Page transition — fade in on initial load and bfcache restoration
     document.body.style.opacity = '0';
     document.body.style.transition = 'opacity 0.45s ease';
-    window.addEventListener('load', () => {
+    window.addEventListener('pageshow', (event) => {
+      if ((event as PageTransitionEvent).persisted) {
+        // Restored from bfcache — reset body opacity immediately, then animate in
+        document.body.style.transition = 'none';
+        document.body.offsetHeight; // force reflow
+        document.body.style.transition = 'opacity 0.45s ease';
+      }
       document.body.style.opacity = '1';
     });
 
