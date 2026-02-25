@@ -63,18 +63,27 @@ import WebLayout from '../../layouts/WebLayout.astro';
 
     <div class="featured-card fade-in">
       <div class="featured-content">
-        <span class="featured-badge">In Deployment</span>
+        <span class="featured-badge">Now Live</span>
         <h2>Sunny Nails Spa</h2>
         <p>
-          A calm, inviting web presence for a local spa business. Built with the same
-          static architecture we champion — fast, reliable, and easy to maintain.
+          Quiet Atlas' first client website has launched. Sunny Nails Spa now has a
+          polished, customer-friendly online presence that supports direct bookings
+          and local discovery.
         </p>
-        <a href="/web/work" class="btn">View Our Work</a>
+        <div class="featured-actions">
+          <a href="/web/work" class="btn">View Case Study</a>
+          <a href="https://sunnynailsspa.com" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Visit Live Site</a>
+        </div>
       </div>
       <div class="featured-visual">
-        <div class="featured-placeholder">
-          <span>SN</span>
-        </div>
+        <img
+          src="/images/web/sunny-nails-hero.png"
+          alt="Sunny Nails Spa homepage hero section"
+          class="featured-image"
+          loading="lazy"
+          width="1366"
+          height="768"
+        />
       </div>
     </div>
   </section>
@@ -193,6 +202,12 @@ import WebLayout from '../../layouts/WebLayout.astro';
     margin-bottom: var(--space-lg);
   }
 
+  .featured-actions {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
   .featured-visual {
     display: flex;
     align-items: center;
@@ -213,6 +228,14 @@ import WebLayout from '../../layouts/WebLayout.astro';
     font-weight: 700;
     color: var(--text-muted);
     letter-spacing: -0.02em;
+  }
+
+  .featured-image {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    display: block;
   }
 
   @media (max-width: 768px) {

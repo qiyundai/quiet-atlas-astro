@@ -21,24 +21,30 @@ import WebLayout from '../../layouts/WebLayout.astro';
       <!-- Sunny Nails Spa -->
       <article class="project-card">
         <div class="project-visual">
-          <div class="project-placeholder">
-            <span class="project-initials">SN</span>
-          </div>
-          <span class="project-status">In Deployment</span>
+          <img
+            src="/images/web/sunny-nails-hero.png"
+            alt="Sunny Nails Spa homepage hero section"
+            class="project-image"
+            loading="lazy"
+            width="1366"
+            height="768"
+          />
+          <span class="project-status">Live</span>
         </div>
         <div class="project-info">
           <h2>Sunny Nails Spa</h2>
           <p class="project-type">Local Business Website</p>
           <p class="project-desc">
-            A warm, inviting web presence for a nail spa that wanted something as
-            welcoming as their physical space. Built with static architecture for
-            speed and reliability — zero maintenance burden for the business owner.
+            Quiet Atlas' first client website is now live at sunnynailsspa.com.
+            We designed a warm, polished web presence that reflects the in-person
+            experience and gives customers a clear path to book online.
           </p>
           <div class="project-tech">
-            <span>Next.js</span>
-            <span>TinaCMS</span>
-            <span>Cloudflare</span>
+            <span>Responsive Design</span>
+            <span>Booking Flow UX</span>
+            <span>Local SEO Foundations</span>
           </div>
+          <a href="https://sunnynailsspa.com" class="btn project-link" target="_blank" rel="noopener noreferrer">Visit Live Site</a>
         </div>
       </article>
 
@@ -141,6 +147,14 @@ import WebLayout from '../../layouts/WebLayout.astro';
     justify-content: center;
   }
 
+  .project-image {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    display: block;
+  }
+
   .project-initials {
     font-family: var(--font-display);
     font-size: 3rem;
@@ -204,6 +218,10 @@ import WebLayout from '../../layouts/WebLayout.astro';
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     color: var(--text-secondary);
+  }
+
+  .project-link {
+    margin-top: var(--space-md);
   }
 
   @media (max-width: 768px) {
