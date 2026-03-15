@@ -1,0 +1,300 @@
+---
+import GamesLayout from '../../layouts/GamesLayout.astro';
+---
+
+<GamesLayout title="The King's Search" description="The King's Search — an async co-op roguelike deckbuilder by Quiet Atlas. Find the princess before it's too late. 1–4 players, four classes, procedural maps.">
+  <!-- Hero -->
+  <section class="game-hero">
+    <div class="game-hero-visual game-hero-image kings-search-hero-bg">
+      <div class="game-hero-overlay"></div>
+      <div class="game-hero-content container fade-in">
+        <span class="game-hero-label">Async Co-op Roguelike Deckbuilder · Strategic</span>
+        <h1 class="game-hero-title">The King's Search</h1>
+        <p class="game-hero-tagline">Find the princess. Before it's too late.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="game-about container">
+    <div class="content-width">
+      <div class="game-lead fade-in">
+        <p class="lead-text">
+          A king's daughter is missing. One to four players take on the roles of <strong>Warrior</strong>,
+          <strong>Ranger</strong>, <strong>Guardian</strong>, and <strong>Mystic</strong> — traversing
+          procedurally generated maps, fighting through card-based combat, and racing against a
+          deterioration system that measures how long the princess has been waiting. Find her early
+          and she's hopeful. Find her late and she's broken. Never find her — and you win the fight
+          but lose the reason.
+        </p>
+      </div>
+
+      <div class="pull-quote fade-in">
+        "The sting of winning the fight but losing the reason."
+      </div>
+
+      <div class="game-details fade-in">
+        <h2>Core Mechanics</h2>
+        <p>
+          <strong>Class-driven deckbuilding</strong> — Four classes, each with a unique stance mechanic
+          and passive ability. Warriors accumulate Strength and burst. Rangers draw cards and apply
+          multi-target pressure. Guardians generate block and protect the party. Mystics debuff enemies
+          and manipulate energy. Cross-player synergy cards reward cooperation.
+        </p>
+        <p>
+          <strong>Energy growth system</strong> — Energy starts at 3 and scales with round count, not
+          time. Early rounds favour cheap Iron cards; long boss fights unlock devastating Gold plays
+          at 5–6 energy. Combat is an escalating arc — setup, decision-making, then explosive finishes.
+        </p>
+        <p>
+          <strong>The Princess</strong> — Her HP and Sanity degrade based on discovery timing and
+          in-run events. Sanity is a hidden numeric value mapped to visible states — Hopeful, Worried,
+          Fearful, Desperate, Broken — each applying combat-wide effects. Good care is rewarded:
+          consistent rest and positive events can restore her past her starting state.
+        </p>
+
+        <h2>Co-op Design</h2>
+        <p>
+          <strong>Async multiplayer</strong> — Built for players who can't be online at the same time.
+          Sanity decay is event-driven, never time-driven. No one is punished for having a life outside
+          the game. Sync play is supported but never required.
+        </p>
+        <p>
+          <strong>Shared combat nodes</strong> — When players meet at the same map node, they fight
+          together. Cross-player cards like Convergence, Stand United, and Volley turn coordination
+          into power. Solo players can still clear the game — but the party makes it sing.
+        </p>
+      </div>
+
+      <div class="game-features stagger-children">
+        <div class="feature-card card">
+          <h3>Class Identity</h3>
+          <p>Four distinct classes with unique stances, passives, and card pools. Warrior burst, Ranger draw engines, Guardian shields, Mystic debuffs — each changes how combat feels.</p>
+        </div>
+        <div class="feature-card card">
+          <h3>The Princess</h3>
+          <p>A deterioration system that gives the search emotional weight. Her state shifts combat difficulty and shapes the ending you earn.</p>
+        </div>
+        <div class="feature-card card">
+          <h3>Async Co-op</h3>
+          <p>Play together without needing to be online at the same time. Every mechanic respects async — no idle penalties, no real-time pressure.</p>
+        </div>
+      </div>
+
+      <div class="signature fade-in">
+        <p><strong>Signature identity:</strong> A deckbuilder where what you're fighting for matters more than what you're fighting.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info -->
+  <section class="game-info container">
+    <div class="info-grid fade-in">
+      <div class="info-block">
+        <h3>Status</h3>
+        <p>Playable Prototype</p>
+      </div>
+      <div class="info-block">
+        <h3>Genre</h3>
+        <p>Async Co-op Roguelike Deckbuilder</p>
+      </div>
+      <div class="info-block">
+        <h3>Platform</h3>
+        <p>Web</p>
+      </div>
+      <div class="info-block">
+        <h3>Players</h3>
+        <p>1–4</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta container">
+    <div class="cta-inner fade-in">
+      <hr class="ornamental" />
+      <p class="cta-text">The King's Search is playable now. Begin the search.</p>
+      <a href="https://kings-search.quietatlas.io/" target="_blank" rel="noopener noreferrer" class="btn btn-large">Play the Prototype</a>
+    </div>
+  </section>
+</GamesLayout>
+
+<style>
+  .game-hero {
+    margin-top: calc(-1 * var(--nav-height));
+  }
+
+  .game-hero-visual {
+    min-height: 60vh;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
+
+  .game-hero-image {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .kings-search-hero-bg {
+    background-image: url('/images/games/kings-search-concept.png');
+    background-color: #0a0a12;
+  }
+
+  .game-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(8, 8, 12, 0.3) 0%, rgba(8, 8, 12, 0.9) 100%);
+  }
+
+  .game-hero-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .game-hero-label {
+    display: inline-block;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-bottom: var(--space-md);
+  }
+
+  .game-hero-title {
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: var(--space-md);
+  }
+
+  .game-hero-tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin: 0;
+  }
+
+  .game-about {
+    padding: var(--space-2xl) 0;
+  }
+
+  .lead-text {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  .game-details {
+    margin-top: var(--space-xl);
+  }
+
+  .game-details h2 {
+    font-size: 1.75rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .game-details p {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  .signature {
+    margin-top: var(--space-xl);
+    padding: var(--space-md);
+    border-left: 3px solid var(--accent);
+    background: var(--bg-alt);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  .signature p {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .game-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+  }
+
+  .feature-card h3 {
+    font-size: 1rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .feature-card p {
+    font-family: var(--font-serif);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .game-features {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .game-info {
+    padding: var(--space-xl) 0;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+  }
+
+  .info-block h3 {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-xs);
+  }
+
+  .info-block p {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    color: var(--text);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .info-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .cta {
+    padding: var(--space-xl) 0 var(--space-2xl);
+  }
+
+  .cta-inner {
+    text-align: center;
+  }
+
+  .cta-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+  }
+</style>

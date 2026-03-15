@@ -21,6 +21,7 @@ const currentPath = Astro.url.pathname;
 
       <ul class="nav-links">
         <li><a href="/games" class:list={[{ active: currentPath === '/games' || currentPath === '/games/' }]}>Home</a></li>
+        <li><a href="/games/kings-search" class:list={[{ active: currentPath.startsWith('/games/kings-search') }]}>King's Search</a></li>
         <li><a href="/games/vestige" class:list={[{ active: currentPath.startsWith('/games/vestige') }]}>Vestige</a></li>
         <li><a href="/games/teru" class:list={[{ active: currentPath.startsWith('/games/teru') }]}>Teru</a></li>
         <li><a href="/games/bullet-well" class:list={[{ active: currentPath.startsWith('/games/bullet-well') }]}>Bullet Well</a></li>
@@ -40,6 +41,7 @@ const currentPath = Astro.url.pathname;
   <div class="mobile-menu" id="mobile-menu">
     <ul class="mobile-menu-links">
       <li><a href="/games">Home</a></li>
+      <li><a href="/games/kings-search">King's Search</a></li>
       <li><a href="/games/vestige">Vestige</a></li>
       <li><a href="/games/teru">Teru</a></li>
       <li><a href="/games/bullet-well">Bullet Well</a></li>
@@ -66,6 +68,7 @@ const currentPath = Astro.url.pathname;
         </div>
 
         <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="/games/kings-search">King's Search</a>
           <a href="/games/vestige">Vestige</a>
           <a href="/games/teru">Teru</a>
           <a href="/games/bullet-well">Bullet Well</a>
