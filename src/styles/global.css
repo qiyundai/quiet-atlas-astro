@@ -162,7 +162,7 @@ strong { color: var(--text); }
 }
 
 @media (max-width: 768px) {
-  .container { padding: 0 var(--space-lg); }
+  .container { padding: 0 var(--space-md); }
 }
 
 .content-width {
