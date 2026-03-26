@@ -2,15 +2,15 @@
 import GamesLayout from '../../layouts/GamesLayout.astro';
 ---
 
-<GamesLayout title="The King's Search" description="The King's Search — an async co-op roguelike deckbuilder by Quiet Atlas. Find the princess before it's too late. 2–4 players, four classes, procedural maps.">
+<GamesLayout title="The King's Search" description="The King's Search — an async co-op deckbuilder built for adults who can't find time to game together. Explore on your phone, fight bosses with friends. Free to play in your browser.">
   <!-- Hero -->
   <section class="game-hero">
     <div class="game-hero-visual game-hero-image kings-search-hero-bg">
       <div class="game-hero-overlay"></div>
       <div class="game-hero-content container fade-in">
-        <span class="game-hero-label">Async Roguelike Extraction Deckbuilder · Strategic</span>
+        <span class="game-hero-label">Async Co-op Deckbuilder · Play on your own time</span>
         <h1 class="game-hero-title">The King's Search</h1>
-        <p class="game-hero-tagline">Find the princess. Before it's too late.</p>
+        <p class="game-hero-tagline">Built for the friends you never have time to play with.</p>
         <a href="https://kings-search.quietatlas.io/" target="_blank" rel="noopener noreferrer" class="btn btn-large hero-cta">Play the Prototype</a>
       </div>
     </div>
@@ -21,70 +21,65 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
     <div class="content-width">
       <div class="game-lead fade-in">
         <p class="lead-text">
-          A king's daughter is missing. Two to four players take on the roles of <strong>Warrior</strong>,
-          <strong>Ranger</strong>, <strong>Guardian</strong>, and <strong>Mystic</strong> — traversing
-          procedurally generated maps, fighting through card-based combat, and racing against a
-          deterioration system that measures how long the princess has been waiting. Find her early
-          and she's hopeful. Find her late and she's broken. Never find her — and you win the fight
-          but lose the reason.
+          Your friends are in different cities. Different time zones. You haven't played something
+          together in months — maybe years. The King's Search is a co-op deckbuilder designed around
+          that reality. Explore a few nodes on your phone while your kid naps. Your friend does the
+          same on their lunch break halfway around the world. When you're both free at the same time,
+          you fight a boss together.
         </p>
       </div>
 
       <div class="pull-quote fade-in">
-        "The sting of winning the fight but losing the reason."
+        "Async when life demands it. Co-op when the stars align."
       </div>
 
       <div class="game-details fade-in">
-        <h2>Core Mechanics</h2>
+        <h2>How It Plays</h2>
         <p>
-          <strong>Class-driven deckbuilding</strong> — Four classes, each with a unique stance mechanic
-          and passive ability. Warriors accumulate Strength and burst. Rangers draw cards and apply
-          multi-target pressure. Guardians generate block and protect the party. Mystics debuff enemies
-          and manipulate energy. Cross-player synergy cards reward cooperation.
+          <strong>Class-driven deckbuilding</strong> — Four classes, each with a distinct playstyle.
+          Frontline damage, ranged pressure, party defense, enemy disruption. You build your deck
+          across five procedurally generated stages — camps, towns, shrines, elite fights — and
+          cross-player synergy cards reward the moments you coordinate.
         </p>
         <p>
-          <strong>Energy growth system</strong> — Energy starts at 3 and scales with round count, not
-          time. Early rounds favour cheap Iron cards; long boss fights unlock devastating Gold plays
-          at 5–6 energy. Combat is an escalating arc — setup, decision-making, then explosive finishes.
-        </p>
-        <p>
-          <strong>The Princess</strong> — Her HP and Sanity degrade based on discovery timing and
-          in-run events. Sanity is a hidden numeric value mapped to visible states — Hopeful, Worried,
-          Fearful, Desperate, Broken — each applying combat-wide effects. Good care is rewarded:
-          consistent rest and positive events can restore her past her starting state.
+          <strong>The extraction choice</strong> — In the second half of each stage, an abducted princess
+          is hidden somewhere on the map. Whoever finds her becomes her carrier — she follows you into
+          battle with her own HP. You can extract her early at camp or town for a safe win, or push
+          deeper for better rewards and risk losing everything. Her condition shifts based on how
+          quickly she's found and what happens along the way.
         </p>
 
-        <h2>Co-op Design</h2>
+        <h2>Co-op Without Calendars</h2>
         <p>
-          <strong>Async multiplayer</strong> — Built for adults who don't have chunks of time to sit
-          down and game together. Short bursts of meaningful co-op in a fantasy setting — play on your
-          own schedule, and every session moves the campaign forward. The princess's decay is
-          event-driven, never time-driven. No one is punished for having a life outside the game.
+          <strong>Async is the default</strong> — This isn't multiplayer with an async option bolted on.
+          Async is how the game is meant to be played. Short sessions, every action moves the campaign
+          forward. The princess's condition responds to in-game events, never real-world time.
+          No one is punished for having a life outside the game.
         </p>
         <p>
-          <strong>Shared combat nodes</strong> — When players meet at the same map node, they fight
-          together. Cross-player cards like Convergence, Stand United, and Volley turn coordination
-          into power. A duo can clear the game — but a full party makes it sing.
+          <strong>Together when it counts</strong> — When players land on the same map node, they fight
+          together. Combat is synchronous and turn-based, with energy and card mechanics that
+          reward coordination. A duo can clear the game — but a full party makes it sing.
         </p>
       </div>
 
       <div class="game-features stagger-children">
         <div class="feature-card card">
-          <h3>Class Identity</h3>
-          <p>Four distinct classes with unique stances, passives, and card pools. Warrior burst, Ranger draw engines, Guardian shields, Mystic debuffs — each changes how combat feels.</p>
+          <h3>Play Anywhere</h3>
+          <p>Runs in your browser as a PWA. Phone, tablet, desktop — no download, no app store, no account required. Free to play.</p>
         </div>
         <div class="feature-card card">
-          <h3>The Princess</h3>
-          <p>A deterioration system that gives the search emotional weight. Her state shifts combat difficulty and shapes the ending you earn.</p>
+          <h3>The Extraction Choice</h3>
+          <p>Every stage ends with a decision. You've found the princess — do you take the safe win, or push deeper for greater rewards? The best runs are the ones where you almost didn't make it out.</p>
         </div>
         <div class="feature-card card">
-          <h3>Async Co-op</h3>
-          <p>Designed for adults without time to sync up. Short bursts of meaningful co-op — every session moves the campaign forward, no scheduling required.</p>
+          <h3>Built for Real Life</h3>
+          <p>Play a node during a coffee break. Pick it up again tomorrow. Your friends do the same, wherever they are. Progress is always forward.</p>
         </div>
       </div>
 
       <div class="signature fade-in">
-        <p><strong>Signature identity:</strong> A deckbuilder where what you're fighting for matters more than what you're fighting.</p>
+        <p><strong>Signature identity:</strong> A co-op deckbuilder for the people you never have time to play with.</p>
       </div>
     </div>
   </section>
@@ -98,15 +93,15 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
       </div>
       <div class="info-block">
         <h3>Genre</h3>
-        <p>Async Roguelike Extraction Deckbuilder</p>
+        <p>Async Co-op Extraction Deckbuilder</p>
       </div>
       <div class="info-block">
         <h3>Platform</h3>
-        <p>Web</p>
+        <p>Browser (PWA) · Phone, Tablet, Desktop</p>
       </div>
       <div class="info-block">
         <h3>Players</h3>
-        <p>1–4</p>
+        <p>1–4 · Solo or Co-op</p>
       </div>
     </div>
   </section>
@@ -115,7 +110,7 @@ import GamesLayout from '../../layouts/GamesLayout.astro';
   <section class="cta container">
     <div class="cta-inner fade-in">
       <hr class="ornamental" />
-      <p class="cta-text">The King's Search is playable now. Begin the search.</p>
+      <p class="cta-text">It's free, it runs in your browser, and your first session takes five minutes. Start a search.</p>
       <a href="https://kings-search.quietatlas.io/" target="_blank" rel="noopener noreferrer" class="btn btn-large">Play the Prototype</a>
     </div>
   </section>
