@@ -1,0 +1,13 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://quietatlas.io/api/contact",
+      "service-desc": [
+        { "href": "https://quietatlas.io/openapi.yaml", "type": "application/yaml" }
+      ],
+      "service-doc": [
+        { "href": "https://quietatlas.io/web/contact", "type": "text/html" }
+      ]
+    }
+  ]
+}

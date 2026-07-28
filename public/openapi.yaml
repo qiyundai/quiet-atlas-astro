@@ -1,0 +1,83 @@
+openapi: "3.1.0"
+info:
+  title: Quiet Atlas API
+  version: "1.0.0"
+  description: Public API for quietatlas.io — a web development and indie game studio.
+servers:
+  - url: https://quietatlas.io
+paths:
+  /api/contact:
+    post:
+      summary: Submit a contact form enquiry
+      description: >
+        Accepts an unauthenticated form submission and sends an email notification
+        to the studio. No CSRF or Turnstile challenge is enforced at the API level;
+        intended for browser-based form use.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [name, email]
+              properties:
+                name:
+                  type: string
+                  description: Sender's full name
+                email:
+                  type: string
+                  format: email
+                  description: Sender's email address (used as Reply-To)
+                project:
+                  type: string
+                  description: Brief description of the project or message
+          multipart/form-data:
+            schema:
+              type: object
+              required: [name, email]
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                project:
+                  type: string
+      responses:
+        "200":
+          description: Message sent successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  id:
+                    type: string
+                    description: Resend message ID
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: false
+                  error:
+                    type: string
+        "500":
+          description: Delivery failure
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: false
+                  error:
+                    type: string

@@ -1,0 +1,14 @@
+/
+  Link: </sitemap-index.xml>; rel="sitemap", </.well-known/api-catalog>; rel="api-catalog", </.well-known/agent-skills/index.json>; rel="https://agentskills.io/rel/index"
+
+/.well-known/api-catalog
+  Content-Type: application/linkset+json
+
+/.well-known/agent-skills/index.json
+  Content-Type: application/json
+
+/auth.md
+  Content-Type: text/markdown; charset=utf-8
+
+/openapi.yaml
+  Content-Type: application/yaml

@@ -1,0 +1,90 @@
+---
+// Registers site tools with navigator.modelContext (WebMCP) for AI agents.
+// Only include this component on pages where agent tool discovery is desired.
+---
+
+<script>
+if (typeof navigator !== 'undefined' && 'modelContext' in navigator) {
+  const mc = navigator.modelContext as {
+    provideContext: (opts: {
+      tools: Array<{
+        name: string;
+        description: string;
+        inputSchema: object;
+        execute: (input: unknown) => unknown;
+      }>;
+    }) => void;
+  };
+
+  mc.provideContext({
+    tools: [
+      {
+        name: 'listGames',
+        description: 'Returns the list of games made by Quiet Atlas with title, genre, blurb, and URL.',
+        inputSchema: { type: 'object', properties: {} },
+        execute: () => [
+          {
+            slug: 'kings-search',
+            title: "The King's Search",
+            genre: 'Async Roguelike Extraction Deckbuilder · Strategic',
+            blurb: "A king's daughter is missing. Two to four players take on distinct class roles — Warrior, Ranger, Guardian, Mystic — traversing procedural maps through card-based combat. A deterioration system tracks how long the princess has been waiting.",
+            url: 'https://quietatlas.io/games/kings-search',
+          },
+          {
+            slug: 'bullet-well',
+            title: 'Bullet Well',
+            genre: 'Physics Platformer · Emergent Challenge',
+            blurb: 'Climb a seemingly endless well while bullets ricochet violently between its walls. Your own shots create danger. Your weapon becomes the level design.',
+            url: 'https://quietatlas.io/games/bullet-well',
+          },
+        ],
+      },
+      {
+        name: 'listWebServices',
+        description: 'Returns the web development services offered by Quiet Atlas.',
+        inputSchema: { type: 'object', properties: {} },
+        execute: () => ({
+          studio: 'Quiet Atlas',
+          focus: 'Calm, deliberate web development for clients who value substance over noise.',
+          services: [
+            'Static site architecture',
+            'Git-based content management',
+            'Performance-first builds',
+            'Zero maintenance headache sites',
+          ],
+          pagesUrl: 'https://quietatlas.io/web/services',
+          contactUrl: 'https://quietatlas.io/web/contact',
+        }),
+      },
+      {
+        name: 'getGameDetails',
+        description: 'Returns detailed information for a single game by slug.',
+        inputSchema: {
+          type: 'object',
+          required: ['slug'],
+          properties: {
+            slug: {
+              type: 'string',
+              enum: ['kings-search', 'bullet-well'],
+              description: 'The game slug',
+            },
+          },
+        },
+        execute: (input) => {
+          const { slug } = input as { slug: string };
+          return { url: `https://quietatlas.io/games/${slug}` };
+        },
+      },
+      {
+        name: 'openContactPage',
+        description: 'Navigates the browser to the Quiet Atlas web contact page.',
+        inputSchema: { type: 'object', properties: {} },
+        execute: () => {
+          window.location.href = '/web/contact';
+          return { navigating: true };
+        },
+      },
+    ],
+  });
+}
+</script>
