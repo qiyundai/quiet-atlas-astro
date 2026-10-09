@@ -1,0 +1,15 @@
+---
+import Console from '../../layouts/Console.astro';
+import { resources } from '../../../shared/registry';
+export function getStaticPaths() { return resources.filter(r => r.kind === 'game').map(resource => ({ params: { game: resource.id }, props: { resource } })); }
+const { resource } = Astro.props;
+const domains = resource.id === 'kings-search' ? ['Users & characters', 'Campaigns', 'Invitations'] : resource.id === 'darts-vs-squirts' ? ['Rooms & admission', 'Connection quality', 'Performance & errors'] : ['Service health', 'Player activity', 'Game administration'];
+---
+<Console title={resource.name} eyebrow="Games" description={resource.description}>
+  <section class="panel service-panel" data-resource={resource.id}>
+    <div class="section-heading"><h2>Service availability</h2><span class="badge" data-status>Not checked</span></div><p data-detail>Status has not been checked.</p>
+    <div class="section-heading"><p id="checked-at" aria-live="polite">Monitoring integration is pending.</p><button id="refresh" type="button">Check availability ↻</button></div>
+  </section>
+  <section class="panel"><p class="eyebrow">Administration</p><h2>{resource.migration === 'planned' ? 'Ready for a future connection' : 'Continue with your existing tools'}</h2><p>{resource.migration === 'planned' ? 'This workspace is reserved for the game’s services and admin controls when they become available.' : 'Game administration is still handled in the current dashboard. Its existing permissions and behavior remain in place during migration.'}</p>{resource.legacyAdmin && <a class="button" href={resource.legacyAdmin} target="_blank" rel="noopener noreferrer">Open current dashboard ↗</a>}</section>
+  <div class="resource-grid modules">{domains.map(name => <section class="panel"><span class="badge">Not connected</span><h3>{name}</h3><p>Reporting and controls will appear here after this module is connected.</p></section>)}</div>
+</Console>

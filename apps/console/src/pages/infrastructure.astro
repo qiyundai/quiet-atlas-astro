@@ -1,0 +1,7 @@
+---
+import Console from '../layouts/Console.astro';
+---
+<Console title="Infrastructure" description="A shared view of the services supporting Quiet Atlas.">
+  <section class="panel"><p class="eyebrow">Cloudflare</p><h2>Capacity and spending are not yet connected</h2><p>This console does not yet have account usage or billing data. Request volume, execution time, storage and relay usage will be connected with measured capacity and budget thresholds.</p><a href="https://dash.cloudflare.com" target="_blank" rel="noopener noreferrer">Open Cloudflare account ↗</a></section>
+  <div class="resource-grid modules">{['Workers & databases', 'Relay & connections', 'Budgets & alerts'].map(name => <section class="panel"><span class="badge">Not connected</span><h3>{name}</h3><p>Usage and limits need a verified data source before they can be shown.</p></section>)}</div>
+</Console>

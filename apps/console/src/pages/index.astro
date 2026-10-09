@@ -1,0 +1,16 @@
+---
+import Console from '../layouts/Console.astro';
+import { resources } from '../../shared/registry';
+---
+<Console title="Your ecosystem, together." eyebrow="Overview" description="A shared workspace for Quiet Atlas games, websites and infrastructure.">
+  <section class="status-section" aria-labelledby="services-heading">
+    <div class="section-heading"><div><h2 id="services-heading">Services</h2><p id="checked-at" aria-live="polite">Availability has not been checked.</p></div><button id="refresh" type="button">Check availability <span aria-hidden="true">↻</span></button></div>
+    <div class="resource-grid">{resources.map(resource => <article class="card" data-resource={resource.id}>
+      <div class="card-top"><span class="eyebrow">{resource.kind === 'site' ? 'Website' : 'Game'}</span><span class="badge" data-status>Not checked</span></div>
+      <h3><a href={resource.path}>{resource.name}</a></h3><p>{resource.description}</p>
+      <p class="status-detail" data-detail>Availability and monitoring appear here once connected.</p>
+      <div class="card-foot"><a href={resource.path}>Open workspace <span aria-hidden="true">→</span></a><span>{resource.migration === 'planned' ? 'Planned' : 'Migration in progress'}</span></div>
+    </article>)}</div>
+  </section>
+  <section class="split"><div class="panel"><p class="eyebrow">The shared picture</p><h2>Operations in one place</h2><p>Availability is the first connection. Player activity, capacity, errors and spending will follow as each service is integrated.</p><a href="/infrastructure/">View infrastructure →</a></div><div class="panel"><p class="eyebrow">Safe transition</p><h2>Your existing tools remain available</h2><p>Each game’s workspace links to its current admin tools while its controls and reporting move into the console.</p><a href="/activity/">View activity →</a></div></section>
+</Console>

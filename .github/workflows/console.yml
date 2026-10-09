@@ -1,0 +1,31 @@
+name: Quiet Atlas Console
+on:
+  pull_request:
+    paths: ['apps/console/**', '.github/workflows/console.yml', 'package-lock.json', 'tsconfig.json']
+  push:
+    branches: [main]
+    paths: ['apps/console/**', '.github/workflows/console.yml', 'package-lock.json', 'tsconfig.json']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            apps/console/package-lock.json
+      # Vite also reads the parent site's tsconfig; install its locked Astro.
+      - run: npm ci
+      - run: npm ci
+        working-directory: apps/console
+      - run: npm run validate
+        working-directory: apps/console
+      - run: npm audit --audit-level=high
+        working-directory: apps/console
+      - run: npm run build

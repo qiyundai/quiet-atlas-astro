@@ -1,0 +1,29 @@
+{
+  "name": "@quiet-atlas/console",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro build && wrangler dev --env local --port 8810",
+    "build": "astro build",
+    "types": "wrangler types --strict-vars false",
+    "check": "tsc --noEmit",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "validate": "npm run types && npm run check && npm test && wrangler deploy --dry-run",
+    "predeploy": "node tools/check-deploy.mjs",
+    "deploy": "npm run validate && node tools/deploy.mjs"
+  },
+  "dependencies": {
+    "astro": "7.3.8",
+    "jose": "6.2.12"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12",
+    "miniflare": "5.20261006.1-alpha",
+    "typescript": "5.9.3",
+    "wrangler": "4.149.0"
+  }
+}
