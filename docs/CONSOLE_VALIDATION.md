@@ -65,3 +65,10 @@ checks pass, do not claim a live unified console or actual game readiness.
 Hosted CI status must be checked on the foundation PR. Prior game Actions jobs
 were blocked by the account's Actions budget; local validation is the available
 evidence if that blocker persists. No billing or spending changes are made.
+
+This public repository's hosted runner did start. Its first install exposed
+missing optional native packages in the Windows-generated lockfile. The console
+lock was regenerated in a clean folder using the runner's npm 11.19.0, then its
+clean-install metadata was verified locally. Check the latest PR run for the
+Linux validation result. Cloudflare's public-site branch preview also built
+successfully; that preview is the existing site, not the private console.
