@@ -30,6 +30,8 @@ required because Vite reads the parent site's Astro tsconfig during build.
 builds eight routes, runs signed-JWT and real workerd/static-asset tests, and
 bundles a Wrangler deployment without publishing. No Cloudflare token is needed
 for local validation. Production deployment requires existing Wrangler login.
+The generated `worker-configuration.d.ts` stays outside Git; regenerate it with
+`npm run types` before running the TypeScript check alone.
 
 ```sh
 npm run deploy
