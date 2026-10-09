@@ -2,6 +2,7 @@ import { AccessError, authenticate } from './auth';
 import { overview } from './services';
 import { resources } from '../shared/registry';
 import { gameApi, GameError } from './games';
+import { websiteApi } from './website';
 import hydrationHashes from '../.generated/csp.json';
 
 function json(value: unknown, status = 200): Response {
@@ -30,10 +31,10 @@ export default {
       const path = new URL(request.url).pathname;
       if (path === '/api' || path.startsWith('/api/')) {
         route = path === '/api/session' ? 'session' : path === '/api/resources' ? 'resources' : path === '/api/overview' ? 'overview' : 'unknown-api';
-        const gameResponse = await gameApi(request, env, actor, requestId);
+        const gameResponse = await websiteApi(request, env, actor, requestId) ?? await gameApi(request, env, actor, requestId);
         if (gameResponse) { route = 'game-api'; response = gameResponse; }
         else if (request.method !== 'GET') response = json({ error: 'method_not_allowed', requestId }, 405);
-        else if (route === 'session') response = json({ schemaVersion: 1, role: 'owner', environment: env.ENVIRONMENT, version: '0.2.0' });
+        else if (route === 'session') response = json({ schemaVersion: 1, role: 'owner', environment: env.ENVIRONMENT, version: '0.3.0' });
         else if (route === 'resources') response = json({ schemaVersion: 1, resources });
         else if (route === 'overview') response = json(await overview(env));
         else response = json({ error: 'not_found', requestId }, 404);

@@ -6,7 +6,7 @@ import { build } from 'esbuild';
 import { Miniflare, Log, LogLevel, convertV4MiniflareOptions } from 'miniflare';
 import { generateKeyPair, exportJWK, SignJWT, createLocalJWKSet } from 'jose';
 
-let worker, auth, services, keys, jwks, keyset;
+let worker, auth, services, website, keys, jwks, keyset;
 const instances = [];
 const env = { ENVIRONMENT: 'production', ACCESS_TEAM_DOMAIN: 'console-test.cloudflareaccess.com', ACCESS_AUD: 'console-test-audience', OWNER_EMAIL: 'owner@example.com' };
 before(async () => {
@@ -14,11 +14,13 @@ before(async () => {
   await Promise.all([
     build({ entryPoints: ['worker/index.ts'], outfile: '.test-build/worker.mjs', bundle: true, format: 'esm', platform: 'browser', target: 'es2022' }),
     build({ entryPoints: ['worker/auth.ts'], outfile: '.test-build/auth.mjs', bundle: true, format: 'esm', platform: 'node', target: 'es2022' }),
-    build({ entryPoints: ['worker/services.ts'], outfile: '.test-build/services.mjs', bundle: true, format: 'esm', platform: 'node', target: 'es2022' })
+    build({ entryPoints: ['worker/services.ts'], outfile: '.test-build/services.mjs', bundle: true, format: 'esm', platform: 'node', target: 'es2022' }),
+    build({ entryPoints: ['worker/website.ts'], outfile: '.test-build/website.mjs', bundle: true, format: 'esm', platform: 'node', target: 'es2022' })
   ]);
   worker = await readFile('.test-build/worker.mjs', 'utf8');
   auth = await import('../.test-build/auth.mjs');
   services = await import('../.test-build/services.mjs');
+  website = await import('../.test-build/website.mjs');
   keys = await generateKeyPair('RS256');
   const publicJwk = { ...await exportJWK(keys.publicKey), kid: 'console-test', alg: 'RS256', use: 'sig' };
   jwks = { keys: [publicJwk] };
@@ -38,6 +40,7 @@ function runtime(bindings = env, serviceBindings = {}, extraWorkers = []) {
     outboundService: async request => {
       if (request.url === `https://${env.ACCESS_TEAM_DOMAIN}/cdn-cgi/access/certs`) return Response.json(jwks);
       if (request.url === 'https://quietatlas.io/') return new Response(null, { status: 200 });
+      if (request.url === 'https://quietatlas.io/build.json') return Response.json({schemaVersion:1,commit:'a'.repeat(40),builtAt:'2026-10-01T12:00:00.000Z',secret:'private-build-secret'});
       throw new Error('Unexpected external request');
     } }, ...extraWorkers],
     log: new Log(LogLevel.ERROR)
@@ -68,7 +71,7 @@ test('real Worker and real built assets deny anonymous or forged access on every
   const html = await readFile('dist/index.html', 'utf8');
   const assetPaths = [...html.matchAll(/(?:src|href)="(\/_astro\/[^\"]+)"/g)].map(match => match[1]);
   assert.ok(assetPaths.length >= 2);
-  for (const path of ['/', '/games/kings-search/', '/logo.png', ...assetPaths, '/api/session', '/api/overview', '/anything']) {
+  for (const path of ['/', '/games/kings-search/', '/logo.png', ...assetPaths, '/api/session', '/api/overview', '/api/sites/quiet-atlas', '/anything']) {
     const response = await mf.dispatchFetch(`https://admin.quietatlas.io${path}`);
     assert.equal(response.status, 401, `${path}: ${response.status === 401 ? '' : await response.clone().text()}`);
     assert.match(response.headers.get('cache-control'), /no-store/);
@@ -185,6 +188,7 @@ test('game reads use named RPC with the verified actor, explicit stage, allowed 
     async getAudit(request){if(request.actor.subject!=='verified-owner')throw Error('bad actor');return {status:200,body:{ok:true,data:[],total:0}};}
   }
   export class Darts extends WorkerEntrypoint {
+    async getWebsite(request){if(request.actor.subject!=='verified-owner'||request.actor.role!=='owner'||request.resourceId!=='quiet-atlas'||request.environment!=='production')throw Error('wrong site actor');if(request.hours===720)throw Error('private website credential');return {schemaVersion:1,resourceId:'quiet-atlas',available:true,queriedAt:'2026-10-01T12:00:00.000Z',pageViews:request.hours,visits:2,metrics:[{key:'lcp',samples:3,good:2,needsImprovement:1,poor:0,private:'private-metric'},{key:'unknown',secret:'private-metric'}],token:'private-site-secret'};}
     async getMonitoring(request){if(request.actor.subject!=='verified-owner')throw Error('wrong actor');return {schemaVersion:1,resourceId:request.resourceId,environment:request.options.environment,analytics:null,errors:['analytics_not_configured']};}
     async mutate(request){if(request.actor.subject!=='verified-owner')throw Error('wrong actor');return {status:200,body:{ok:true,paused:request.action==='admission_pause'}};}
     async getAudit(request){if(request.actor.subject!=='verified-owner')throw Error('wrong actor');return {status:200,body:{ok:true,data:[]}};}
@@ -217,6 +221,13 @@ test('game reads use named RPC with the verified actor, explicit stage, allowed 
   await command('/api/kings/users','DELETE',{},405);
   await request('/api/kings/audit');
   await request('/api/infrastructure');await request('/api/infrastructure?account=other',400);
+  const site=await (await request('/api/sites/quiet-atlas?hours=24')).json();
+  assert.equal(site.pageViews,24);assert.equal(site.visits,2);assert.equal(site.publication.commit,'a'.repeat(40));
+  assert.deepEqual(site.metrics[0],{key:'lcp',samples:3,good:2,needsImprovement:1,poor:0});
+  assert.equal(site.metrics.length,3);assert.doesNotMatch(JSON.stringify(site),/private-|verified-owner/);
+  for(const query of ['hours=1','hours=24&hours=168','site=other','actor=forged','environment=staging','hours=24%22'])await request('/api/sites/quiet-atlas?'+query,400);
+  await request('/api/sites/quiet-atlas',405,{method:'POST'});
+  const missing=await (await request('/api/sites/quiet-atlas?hours=720')).json();assert.equal(missing.available,false);assert.equal(missing.pageViews,null);assert.ok(missing.publication.available);assert.doesNotMatch(JSON.stringify(missing),/private website credential/);
   await request('/api/games/darts-vs-squirts/audit?environment=staging');
   assert.equal((await (await command('/api/games/darts-vs-squirts/admission?environment=staging','POST',{action:'admission_pause'})).json()).paused,true);
   await command('/api/games/darts-vs-squirts/admission','POST',{action:'raise_capacity'},400);
@@ -225,4 +236,14 @@ test('game reads use named RPC with the verified actor, explicit stage, allowed 
   assert.equal((await (await request('/api/games/darts-vs-squirts/monitoring?environment=staging&hours=1')).json()).environment,'staging');
   const denied=await mf.dispatchFetch('https://console.test/api/kings/users');assert.equal(denied.status,401);
   const page=await request('/games/kings-search/users/fixture-record');assert.match(await page.text(),/King’s Search/);
+});
+
+test('published build probes use the fixed website, bounded metadata and no arbitrary upstream fields',async t=>{
+  const original=globalThis.fetch;t.after(()=>{globalThis.fetch=original;});
+  globalThis.fetch=async url=>{assert.equal(url,'https://quietatlas.io/build.json');return Response.json({schemaVersion:1,commit:'a'.repeat(40),builtAt:'2026-10-01T12:00:00.000Z',secret:'private-build'});};
+  assert.deepEqual(await website.publishedWebsite(),{available:true,commit:'a'.repeat(40),builtAt:'2026-10-01T12:00:00.000Z'});
+  for(const response of [new Response('x'.repeat(5000),{headers:{'content-type':'application/json'}}),Response.json({schemaVersion:1,commit:'invalid',builtAt:'invalid'}),new Response('redirect',{status:302}),new Response('never-json')]) {
+    globalThis.fetch=async()=>response;assert.equal((await website.publishedWebsite()).available,false);
+  }
+  globalThis.fetch=()=>new Promise(()=>{});const start=Date.now();assert.equal((await website.publishedWebsite()).available,false);assert.ok(Date.now()-start<4000);
 });

@@ -15,7 +15,7 @@ export const resources: readonly Resource[] = [
   {
     id: 'quiet-atlas', name: 'Quiet Atlas', kind: 'site', path: '/sites/quiet-atlas/',
     description: 'The home of Quiet Atlas, its games and stories.', migration: 'linked',
-    publicUrl: 'https://quietatlas.io', capabilities: ['public-reachability']
+    publicUrl: 'https://quietatlas.io', capabilities: ['public-reachability', 'website-analytics', 'published-build']
   },
   {
     id: 'nomadic-hearth', name: 'Nomadic Hearth', kind: 'game', path: '/games/nomadic-hearth/',

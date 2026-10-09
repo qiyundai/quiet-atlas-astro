@@ -57,7 +57,7 @@ export async function probe(resource: Resource, env: Cloudflare.Env): Promise<Se
     return {
       ...base, availability: 'reachable', latencyMs: Math.round(performance.now() - started),
       evidence: resource.kind === 'game' ? 'health-endpoint' : 'public-website',
-      detail: resource.kind === 'game' ? 'The service responds. Gameplay and database readiness are not yet measured.' : 'The public website responds. Visitor analytics are not yet connected.'
+      detail: resource.kind === 'game' ? 'The service responds. Gameplay and database readiness are not yet measured.' : 'The public website responds.'
     };
   } catch {
     return { ...base, availability: 'unavailable', evidence: resource.kind === 'game' ? 'health-endpoint' : 'public-website',
