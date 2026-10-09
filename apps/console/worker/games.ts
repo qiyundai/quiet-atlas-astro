@@ -86,7 +86,7 @@ export async function bounded<T>(
     if (timer !== undefined) clearTimeout(timer);
   }
 }
-function context(
+export function context(
   resourceId: ResourceId,
   actor: ConsoleActor,
   requestId: string,

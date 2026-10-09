@@ -1,7 +1,8 @@
 ---
 import Console from '../../layouts/Console.astro';
+import Website from '../../modules/Website';
 ---
 <Console title="Quiet Atlas website" eyebrow="Websites" description="The public home of Quiet Atlas, its games and stories.">
-  <section class="panel" data-resource="quiet-atlas"><div class="section-heading"><h2>Public availability</h2><span class="badge" data-status>Not checked</span></div><p data-detail>Status has not been checked.</p><div class="section-heading"><p id="checked-at" aria-live="polite">Visitor analytics are not yet connected.</p><button id="refresh" type="button">Check availability ↻</button></div><a href="https://quietatlas.io" target="_blank" rel="noopener noreferrer">Open public website ↗</a></section>
-  <div class="resource-grid modules">{['Traffic & visitors', 'Deployments', 'Website performance'].map(name => <section class="panel"><span class="badge">Not connected</span><h3>{name}</h3><p>Reporting will appear here once the website’s data sources are connected.</p></section>)}</div>
+  <section class="panel" data-resource="quiet-atlas"><div class="section-heading"><h2>Public availability</h2><span class="badge" data-status>Not checked</span></div><p data-detail>Status has not been checked.</p><div class="section-heading"><p id="checked-at" aria-live="polite">Availability has not been checked.</p><button id="refresh" type="button">Check availability ↻</button></div><a href="https://quietatlas.io" target="_blank" rel="noopener noreferrer">Open public website ↗</a></section>
+  <Website client:load />
 </Console>

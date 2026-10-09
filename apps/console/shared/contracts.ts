@@ -57,3 +57,17 @@ export interface AdminAuditEvent {
   targetId: string;
   outcome: 'succeeded' | 'rejected' | 'failed';
 }
+export interface WebsiteAnalytics {
+  schemaVersion:1;
+  resourceId:'quiet-atlas';
+  available:boolean;
+  queriedAt:string|null;
+  windowStart?:string|null;
+  windowEnd?:string|null;
+  pageViews?:number|null;
+  visits?:number|null;
+  metrics?:{key:string;samples:number|null;good:number|null;needsImprovement:number|null;poor:number|null}[];
+}
+export interface WebsiteReport extends WebsiteAnalytics {
+  publication:{available:boolean;commit:string|null;builtAt:string|null};
+}

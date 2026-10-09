@@ -185,8 +185,9 @@ export default function Infrastructure() {
               key-attributed egress {n(data.turn?.game_egress_gb)} GB.
             </p>
             <p>
-              Pages deployments, website visitor analytics, D1 storage and
-              invoice totals require their own verified sources. Game activity
+              Website traffic, performance ratings and the published build are
+              available in the website workspace. Pages deployment history, D1
+              storage and invoice totals have separate sources. Game activity
               and admission limits are available in each game workspace.
             </p>
           </section>
