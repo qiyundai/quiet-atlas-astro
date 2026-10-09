@@ -1,0 +1,7 @@
+---
+import Console from '../layouts/Console.astro';
+import Infrastructure from '../modules/Infrastructure';
+---
+<Console title="Infrastructure" description="A shared view of the services supporting Quiet Atlas.">
+  <Infrastructure client:only="react" />
+</Console>

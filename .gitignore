@@ -25,3 +25,11 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+
+# Unified console build and local runtime
+apps/console/.wrangler/
+apps/console/.test-build/
+apps/console/.dry-run/
+apps/console/deployment.local.json
+apps/console/worker-configuration.d.ts
+apps/console/.generated/

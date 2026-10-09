@@ -1,0 +1,7 @@
+---
+import Console from '../layouts/Console.astro';
+import Activity from '../modules/Activity';
+---
+<Console title="Activity" description="A shared history of administration across your games.">
+  <Activity client:only="react" />
+</Console>

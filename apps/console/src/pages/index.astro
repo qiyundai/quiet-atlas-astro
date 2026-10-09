@@ -1,0 +1,17 @@
+---
+import Console from '../layouts/Console.astro';
+import { resources } from '../../shared/registry';
+---
+<Console title="Your ecosystem, together." eyebrow="Overview" description="A shared workspace for Quiet Atlas games, websites and infrastructure.">
+  <section class="status-section" aria-labelledby="services-heading">
+    <div class="section-heading"><div><h2 id="services-heading">Services</h2><p id="checked-at" aria-live="polite">Availability has not been checked.</p></div><button id="refresh" type="button">Check availability <span aria-hidden="true">↻</span></button></div>
+    <div class="resource-grid">{resources.map(resource => <article class="card" data-resource={resource.id}>
+      <div class="card-top"><span class="eyebrow">{resource.kind === 'site' ? 'Website' : 'Game'}</span><span class="badge" data-status>Not checked</span></div>
+      <h3><a href={resource.path}>{resource.name}</a></h3><p>{resource.description}</p>
+      <p class="status-detail" data-detail>Availability and monitoring appear here once connected.</p>
+      {['kings-search','darts-vs-squirts'].includes(resource.id) && <p data-summary="">Current game snapshot has not been checked.</p>}
+      <div class="card-foot"><a href={resource.path}>Open workspace <span aria-hidden="true">→</span></a><span>{resource.migration === 'planned' ? 'Planned' : resource.kind==='game'?'Connected module':'Website'}</span></div>
+    </article>)}</div>
+  </section>
+  <section class="split"><div class="panel"><p class="eyebrow">The shared picture</p><h2>Operations in one place</h2><p>Review game administration, connection quality, admission and account usage from the shared workspace. Unconnected sources are labeled explicitly.</p><a href="/infrastructure/">View infrastructure →</a></div><div class="panel"><p class="eyebrow">Administration</p><h2>Changes with a shared history</h2><p>Game backends retain their own data and commit console changes with a durable audit record. Existing dashboards remain available during final migration checks.</p><a href="/activity/">View activity →</a></div></section>
+</Console>

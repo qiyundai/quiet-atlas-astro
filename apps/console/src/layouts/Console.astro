@@ -1,0 +1,44 @@
+---
+import '../styles/console.css';
+import { resources } from '../../shared/registry';
+const { title, eyebrow = 'Quiet Atlas', description } = Astro.props;
+const path = Astro.url.pathname;
+const nav = [
+  { name: 'Overview', path: '/' },
+  ...resources.filter(r => r.kind === 'game').map(r => ({ name: r.name, path: r.path })),
+  { name: 'Quiet Atlas website', path: '/sites/quiet-atlas/' },
+  { name: 'Infrastructure', path: '/infrastructure/' },
+  { name: 'Activity', path: '/activity/' }
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title} · Quiet Atlas Console</title>
+    <link rel="icon" type="image/png" href="/logo.png" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="Quiet Atlas Console home"><img src="/logo.png" width="116" height="116" alt="Quiet Atlas" /><span>Console</span></a>
+      <p class="nav-label">Your ecosystem</p>
+      <nav aria-label="Console">{nav.map(item => <a href={item.path} aria-current={path === item.path ? 'page' : undefined}>{item.name}</a>)}</nav>
+      <div class="owner"><span class="owner-dot"></span>Owner workspace <a href="/cdn-cgi/access/logout">Sign out</a></div>
+    </aside>
+    <main id="main">
+      <header class="topbar"><span>Quiet Atlas / Console</span><span id="environment">Private workspace</span></header>
+      <div class="content">
+        <p class="eyebrow">{eyebrow}</p>
+        <h1>{title}</h1>
+        <p class="lead">{description}</p>
+        <p class="notice" id="connection-error" role="alert" hidden></p>
+        <slot />
+      </div>
+      <footer><span>One home for your games and their operations.</span><span>Console v0.2.0</span></footer>
+    </main>
+    <script src="../scripts/console.ts"></script>
+  </body>
+</html>

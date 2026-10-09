@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "target": "ES2022", "module": "ESNext", "moduleResolution": "Bundler",
+    "lib": ["ES2022", "DOM"], "strict": true, "skipLibCheck": true,
+    "allowImportingTsExtensions": true, "noEmit": true, "jsx": "react-jsx", "resolveJsonModule": true, "allowSyntheticDefaultImports": true
+  },
+  "include": ["worker/**/*.ts", "shared/**/*.ts", "src/scripts/**/*.ts", "src/modules/**/*.ts", "src/modules/**/*.tsx", "worker-configuration.d.ts"]
+}
