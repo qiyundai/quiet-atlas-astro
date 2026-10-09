@@ -1,5 +1,9 @@
 # Console v0.2.0 migration checkpoint — 2026-10-08
 
+Historical checkpoint. Current website reporting is documented in
+[CONSOLE_WEBSITE.md](CONSOLE_WEBSITE.md); current provisioning and acceptance
+evidence belongs in the private operations runbook.
+
 Deployed at https://admin.quietatlas.io/, version
 `6afe242a-a7c9-4416-b830-d75b6302a128`. Existing exact-owner Access application,
 audience and disabled direct origin are preserved. Public Astro site source and

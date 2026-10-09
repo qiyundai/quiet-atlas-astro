@@ -1,20 +1,21 @@
 # Continue the Quiet Atlas console migration
 
-## Current checkpoint: console v0.2.0
+## Current source checkpoint: console v0.3.0
 
 Private summaries, King's administration, Darts monitoring/admission, atomic
 backend audit/idempotency and shared Activity/Infrastructure are implemented
-and deployed. Both live production/staging private API checks passed. Read
-[CONSOLE_MIGRATION_V2.md](CONSOLE_MIGRATION_V2.md) first. The foundation-only
-description below records the earlier starting point, not current capability.
+and deployed. Website analytics and published-build reporting are now implemented;
+read [CONSOLE_WEBSITE.md](CONSOLE_WEBSITE.md) for their sources and limits.
+[CONSOLE_MIGRATION_V2.md](CONSOLE_MIGRATION_V2.md) records the earlier game
+integration checkpoint. Keep current live provisioning and acceptance evidence
+in a private runbook outside this public repository.
 
-Live owner/CSP/module rendering and mobile acceptance passed; see the current
-validation checkpoint. The approved analytics-only credential is installed on
-private ops, with live GraphQL/WAE reads verified and five-minute collection
-enabled. Rotate before January 7, 2027. Remaining: staging TURN and authenticated
-email setup; verify inbox delivery; add verified website deployment /
-visitor sources; perform legacy dashboard cutover only after parity acceptance.
-Do not merge the draft PRs or raise admission limits as an assumed next step.
+Console validation covers signed-owner workerd requests, generated CSP hashes,
+fixed website/resource context, bounded reads and response-field redaction.
+Before retiring legacy dashboards, verify production and staging control parity,
+relay operation, notification inbox delivery and rollback. Keep legacy Access
+applications during cutover. Do not increase game admission limits based on
+analytics request counts or confuse a relay smoke test with a capacity benchmark.
 
 ## Starting point
 
