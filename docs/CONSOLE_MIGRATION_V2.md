@@ -93,7 +93,8 @@ Active console alerts now evaluate current conditions independently of email
 delivery receipts; backend regressions cover both activation and recovery with
 no email binding. The initial scheduled HTTP health probe failed inside Cloudflare;
 the collector now uses the existing private Operations readiness method without
-calling back into monitoring. Isolated staging TURN credentials, game key attribution and an
+calling back into monitoring. Production TURN key-attributed egress is now
+verified in Infrastructure. Isolated staging TURN credentials, staging attribution and an
 authenticated notification sender remain pending. Email Sending lists no
 onboarded sending subdomains.
 Email inbox delivery and alert/recovery verification remain required. Website
@@ -104,7 +105,7 @@ Private backend revisions: King's production `5de5fbbc-6e0e-4cf2-a8cf-4fcf1dc733
 staging `6bb52d7c-abe9-4dd7-a2dd-7e9062bb0937`; Darts production
 `c5a87557-156a-4236-b6aa-a5da6975acfc`, staging
 `cc1a82d6-bea2-4daf-b723-a8942d8e9b97`; private ops
-`f5f44bea-97dd-4887-bd2c-d5a63a67f252`.
+`375ed0d5-2e06-4e7e-bf06-575a75b17a72`.
 
 ## Rollback
 
