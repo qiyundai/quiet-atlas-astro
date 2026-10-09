@@ -8,8 +8,9 @@ and deployed. Both live production/staging private API checks passed. Read
 [CONSOLE_MIGRATION_V2.md](CONSOLE_MIGRATION_V2.md) first. The foundation-only
 description below records the earlier starting point, not current capability.
 
-Remaining: restore browser access for owner/mobile/CSP verification; complete
-approved account analytics credential, staging TURN and authenticated email
+Live owner/CSP/module rendering and mobile acceptance passed; see the current
+validation checkpoint. Remaining: complete action-time-approved account analytics
+credential, staging TURN and authenticated email
 setup; verify collection and inbox delivery; add verified website deployment /
 visitor sources; perform legacy dashboard cutover only after parity acceptance.
 Do not merge the draft PRs or raise admission limits as an assumed next step.

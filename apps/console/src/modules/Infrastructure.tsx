@@ -174,7 +174,7 @@ export default function Infrastructure() {
             <h2>Durable Objects and TURN</h2>
             <p>
               Account totals across all services:{" "}
-              {n(data.durableObjects?.requests)} DO request equivalents,{" "}
+              {n(data.durableObjects?.requests)} DO invocations,{" "}
               {n(data.durableObjects?.errors)} errors,{" "}
               {n(data.durableObjects?.durationGbSeconds)} GB-seconds of
               duration, {n(data.durableObjects?.rowsRead)} rows read and{" "}

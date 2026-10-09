@@ -118,14 +118,18 @@ export default function DartsMonitoring() {
     >([]),
     [auditError, setAuditError] = useState("");
   const retries = useRef(new Map<string, string>());
+  const historyController = useRef<AbortController | null>(null);
   async function history(environment: string) {
+    historyController.current?.abort();
+    const controller = new AbortController();
+    historyController.current = controller;
     setAudit([]);
     setAuditError("");
     try {
       const response = await fetch(
         "/api/games/darts-vs-squirts/audit?" +
           new URLSearchParams({ environment }),
-        { cache: "no-store", signal: AbortSignal.timeout(15000) },
+        { cache: "no-store", signal: AbortSignal.any([controller.signal, AbortSignal.timeout(15000)]) },
       );
       if (
         !response.ok ||
@@ -133,9 +137,9 @@ export default function DartsMonitoring() {
       )
         throw Error();
       const body: { data: typeof audit } = await response.json();
-      setAudit(body.data ?? []);
+      if (!controller.signal.aborted) setAudit(body.data ?? []);
     } catch {
-      setAuditError(
+      if (!controller.signal.aborted) setAuditError(
         "Activity is unavailable. Retry monitoring to check again.",
       );
     }
@@ -240,13 +244,16 @@ export default function DartsMonitoring() {
     void refresh(options, controller.signal);
     return () => {
       controller.abort();
+      historyController.current?.abort();
     };
   }, []);
   const change = (key: string, newValue: string) => {
+    historyController.current?.abort();
     setOptions((previous) => ({ ...previous, [key]: newValue }));
     setData(null);
     setPending(null);
     setAudit([]);
+    setAuditError("");
   };
   const analytics = data?.analytics;
   const timeline = new Map<string, number>();

@@ -840,11 +840,13 @@
 
 .kings-admin .game-tabs {
   display: flex;
+  flex-direction: row;
   gap: 8px;
   flex-wrap: wrap;
   margin-bottom: 28px;
 }
 .kings-admin .game-tabs a {
+  color: var(--ink);
   padding: 10px 14px;
   border: 1px solid var(--border);
   border-radius: 6px;

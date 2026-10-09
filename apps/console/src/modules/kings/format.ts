@@ -1,21 +1,26 @@
-/** Format a Unix epoch (seconds) timestamp as a date. */
+/** Older D1 defaults use seconds; game-created records also use milliseconds. */
+function timestamp(epoch: number | string | null): number | null {
+  if (epoch == null || epoch === '') return null;
+  const numeric = Number(epoch);
+  const ts = Number.isFinite(numeric) ? (Math.abs(numeric) >= 100_000_000_000 ? numeric : numeric * 1000) : typeof epoch === 'string' ? Date.parse(epoch) : NaN;
+  return Number.isFinite(ts) && !Number.isNaN(new Date(ts).getTime()) ? ts : null;
+}
+
 export function formatDate(epoch: number | string | null): string {
-  if (epoch == null) return "—";
-  const ts = typeof epoch === "string" ? parseInt(epoch, 10) : epoch;
-  if (isNaN(ts)) return "—";
-  return new Date(ts * 1000).toLocaleDateString("en-US", {
+  const ts = timestamp(epoch);
+  if (ts === null) return "—";
+  return new Date(ts).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
     year: "numeric",
   });
 }
 
-/** Format a Unix epoch (seconds) timestamp as a date + time. */
+/** Format either stored timestamp representation as a date + time. */
 export function formatDateTime(epoch: number | string | null): string {
-  if (epoch == null) return "—";
-  const ts = typeof epoch === "string" ? parseInt(epoch, 10) : epoch;
-  if (isNaN(ts)) return "—";
-  return new Date(ts * 1000).toLocaleDateString("en-US", {
+  const ts = timestamp(epoch);
+  if (ts === null) return "—";
+  return new Date(ts).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
     year: "numeric",
