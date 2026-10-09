@@ -42,7 +42,8 @@ Create/review the exact-owner Cloudflare Access application for
 `deployment.example.json` to ignored `deployment.local.json` and fill the actual
 account ID, team hostname, app-specific AUD and exact owner email after reviewing
 the saved policy. Set `accessAppVerified` true only after that review. The deploy
-tool installs the three owner settings as private Worker bindings. Keep that file
+tool supplies the three owner settings as secrets during the initial publish,
+using a temporary private file that is removed afterward. Keep the local file
 and its values out of Git. Do not reuse the Darts or King's audience. Missing configuration fails
 closed. All assets and APIs pass through the Worker; `workers.dev` and preview
 URLs are disabled. Do not deploy `--env local` to a publicly accessible domain.

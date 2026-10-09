@@ -14,6 +14,14 @@ Read `apps/console/README.md`, `apps/console/AGENTS.md` and
 
 ## Migration sequence and acceptance gates
 
+The foundation is deployed at **https://admin.quietatlas.io/**. Owner GitHub
+sign-in, anonymous page/asset/API blocking, disabled workers.dev origin,
+live overview data and structured request logging passed on 2026-10-08.
+See `CONSOLE_VALIDATION.md` for evidence and remaining limitations. Continue
+with step 2 below, retaining step 1's checks as regression gates. King's health
+probe currently fails: the inspected API revision lacks `/health`; implement
+its supported private summary/health contract before labeling it ready.
+
 1. **Foundation acceptance.** Verify live owner login, anonymous Access redirects,
    no direct-origin asset/API bypass, active navigation, service availability,
    disconnected reporting labels and desktop/mobile rendering. The local suite
@@ -126,10 +134,11 @@ deployment token. Local Wrangler uses the user's existing OAuth login. Never
 copy that token into the Worker, GitHub, docs or browser. No new persistent
 credential is needed for the foundation's private health service bindings.
 
-GitHub hosted Actions jobs were previously prevented from starting by the
-account's Actions budget. No billing change is authorized by this foundation
-request. Report hosted CI as unrun/blocked if that condition persists and use
-the recorded local checks; do not label the PR CI-green without job evidence.
+The foundation's hosted Linux Actions validation passed on `de1a03d`. Earlier
+game-repository jobs were prevented from starting by the account's Actions
+budget; re-check each repository rather than assuming the same status. No
+billing change is authorized by this foundation request. Report actual job
+evidence and any concrete remaining blocker.
 The public site's existing locked dependencies have legacy audit advisories;
 they are not upgraded in this increment. The independent console dependency
 tree must pass `npm audit --audit-level=high` before handoff.

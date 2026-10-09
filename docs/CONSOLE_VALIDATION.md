@@ -45,30 +45,52 @@ reset after the check. Screenshots are local preview evidence, not live data.
 
 ![Mobile local preview](console-preview-mobile.png)
 
-## Deployment state and remaining checks
+## Live deployment and acceptance
 
-The console Worker/custom domain is **not deployed**. Cloudflare Access creation
-for `admin.quietatlas.io` was prepared with the existing exact-owner policy,
-24-hour session and HTTP-only cookies. Automatic approval review rejected the
-Create action because a persistent Access change requires action-time user
-confirmation. The user was asked to approve that exact configuration or leave
-deployment for the next agent. No workaround was attempted; no Access app,
-token, game permission, Worker route or custom domain was created.
+Deployed on 2026-10-08 (Vancouver; 2026-10-09 UTC) at
+**https://admin.quietatlas.io/**. Worker version:
+`8fe09ea7-7968-454d-ba8d-c8f731fc316e`.
 
-After approval, create the prepared Access app, verify the saved hostname/policy,
-read its distinct AUD and fill ignored `apps/console/deployment.local.json`
-from `deployment.example.json`. Then regenerate
-types, validate, deploy and verify live anonymous redirects and actual owner
-HTML/API/health checks. Keep workers.dev and preview URLs disabled. Until those
-checks pass, do not claim a live unified console or actual game readiness.
+- User approved the owner-only Access application. Saved app protects all paths,
+  reuses the existing exact-owner policy, has a 24-hour session and HTTP-only
+  cookies. Its distinct audience and owner settings are private Worker secrets;
+  the ignored local deployment file contains the reviewed configuration.
+- First publish correctly rejected missing required secrets. The deploy helper
+  now supplies those secrets in the initial publish using Wrangler's
+  `--secrets-file`, then removes its temporary private file in a finally block.
+  No secret value appears in command arguments or public source.
+- Anonymous requests to `/`, a game page, logo, built JS and CSS, session,
+  overview and unknown API all returned 302 to Access. A forged JWT with a
+  spoofed loopback forwarded host also returned 302. Direct workers.dev HTML
+  and logo returned 404. Preview origins stay disabled in configuration.
+- Existing GitHub owner sign-in opened the actual console with **Owner ·
+  Production**. Session API populated that label; overview API populated the
+  manual availability results. Game workspace links retain the existing King's
+  and Darts admin destinations. Infrastructure and activity pages render with
+  their unconnected reporting labels. Browser error/warning capture was empty.
+- Live Darts signaling and the public site responded. Nomadic Hearth is not
+  connected. King's `/health` check failed independently; the previously
+  inspected game revision has no `/health` route in its API entrypoint. This
+  result does not establish a game outage or DB readiness. Connect a supported
+  private summary/health contract in the owning game before claiming readiness.
+- A bounded live tail observed a schema-v1 `console_request` event for an owner
+  overview refresh, status 200, duration 22 ms. Only the fixed event fields were
+  printed; raw tail request metadata stayed in memory. Persistent Workers Logs
+  are configured; retention and admin audit persistence remain future work.
+- Public `https://quietatlas.io/` returned 200 after deployment. Public-site
+  code/deployment settings and game backends/admission limits were unchanged.
 
-Hosted CI status must be checked on the foundation PR. Prior game Actions jobs
-were blocked by the account's Actions budget; local validation is the available
-evidence if that blocker persists. No billing or spending changes are made.
+The live desktop screenshot is retained in the task's private local handoff,
+outside this public repository. The mobile evidence above is from the local
+Worker; a live phone-width recheck could not be verified because the browser
+viewport override did not take effect on that tab.
 
-This public repository's hosted runner did start. Its first install exposed
-missing optional native packages in the Windows-generated lockfile. The console
-lock was regenerated in a clean folder using the runner's npm 11.19.0, then its
-clean-install metadata was verified locally. Check the latest PR run for the
-Linux validation result. Cloudflare's public-site branch preview also built
-successfully; that preview is the existing site, not the private console.
+## Hosted validation
+
+GitHub Actions run `37868141089` passed on `de1a03d`: Linux clean install,
+console validation (nine tests), dependency audit and public-site build. This
+repository's hosted runner is available; the earlier game-repository budget
+blocker does not apply to this verified run. The Windows lockfile's missing
+optional native dependencies were repaired using the runner's npm 11.19.0.
+Cloudflare's public-site branch preview also passed; it is the existing website,
+not the console. Check the PR's latest commit checks when continuing.

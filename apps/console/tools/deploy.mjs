@@ -1,5 +1,8 @@
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { mkdtemp, writeFile, unlink, rmdir } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { checkDeployment } from './check-deploy.mjs';
 
 const deployment = await checkDeployment();
@@ -12,11 +15,19 @@ function run(args, input) {
   });
   if (result.error || result.status !== 0) throw new Error('Console deployment did not finish. Keep Access protection active; verify the Worker state before retrying.');
 }
-// The initial version fails closed until the private owner settings are installed.
-run(['deploy', '--env=']);
-run(['secret', 'bulk', '--env='], JSON.stringify({
-  ACCESS_TEAM_DOMAIN: deployment.accessTeamDomain,
-  ACCESS_AUD: deployment.accessAud,
-  OWNER_EMAIL: deployment.ownerEmail
-}));
+// A new Worker requires its secrets in the initial publish. Never put their
+// values in CLI arguments or tracked files, and remove the private file on exit.
+const temporaryDirectory = await mkdtemp(join(tmpdir(), 'quiet-atlas-deploy-'));
+const secretsFile = join(temporaryDirectory, 'secrets.json');
+try {
+  await writeFile(secretsFile, JSON.stringify({
+    ACCESS_TEAM_DOMAIN: deployment.accessTeamDomain,
+    ACCESS_AUD: deployment.accessAud,
+    OWNER_EMAIL: deployment.ownerEmail
+  }), { mode: 0o600 });
+  run(['deploy', '--env=', '--secrets-file', secretsFile]);
+} finally {
+  await unlink(secretsFile).catch(error => { if (error.code !== 'ENOENT') throw error; });
+  await rmdir(temporaryDirectory);
+}
 console.log('Console published with private owner settings. Complete live owner/anonymous acceptance checks before handoff.');
