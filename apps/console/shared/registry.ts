@@ -5,12 +5,12 @@ export const resources: readonly Resource[] = [
   {
     id: 'kings-search', name: "King’s Search", kind: 'game', path: '/games/kings-search/',
     description: 'Players, characters, campaigns and invitations.', migration: 'linked',
-    legacyAdmin: 'https://ks-admin.quietatlas.io', capabilities: ['service-reachability', 'legacy-admin-link']
+    legacyAdmin: 'https://ks-admin.quietatlas.io', capabilities: ['service-reachability', 'private-summary', 'player-administration', 'audited-actions']
   },
   {
     id: 'darts-vs-squirts', name: 'Darts vs Squirts', kind: 'game', path: '/games/darts-vs-squirts/',
     description: 'Rooms, connections, performance and admission.', migration: 'linked',
-    legacyAdmin: 'https://dvs-ops.quietatlas.io', capabilities: ['service-reachability', 'legacy-admin-link']
+    legacyAdmin: 'https://dvs-ops.quietatlas.io', capabilities: ['service-reachability', 'private-summary', 'game-monitoring', 'audited-admission']
   },
   {
     id: 'quiet-atlas', name: 'Quiet Atlas', kind: 'site', path: '/sites/quiet-atlas/',

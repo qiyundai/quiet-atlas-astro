@@ -32,3 +32,4 @@ apps/console/.test-build/
 apps/console/.dry-run/
 apps/console/deployment.local.json
 apps/console/worker-configuration.d.ts
+apps/console/.generated/

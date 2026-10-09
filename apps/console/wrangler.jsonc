@@ -10,8 +10,11 @@
   "vars": { "ENVIRONMENT": "production" },
   "secrets": { "required": ["ACCESS_TEAM_DOMAIN", "ACCESS_AUD", "OWNER_EMAIL"] },
   "services": [
-    { "binding": "KINGS_API", "service": "kings-search-api" },
-    { "binding": "DARTS_SIGNALING", "service": "darts-vs-squirts-signaling" }
+    { "binding": "KINGS_API", "service": "kings-search-admin" },
+    { "binding": "DARTS_SIGNALING", "service": "darts-vs-squirts-signaling" },
+    { "binding": "KINGS_ADMIN", "service": "kings-search-admin", "entrypoint": "ConsoleService" },
+    { "binding": "KINGS_STAGE", "service": "kings-search-admin-staging", "entrypoint": "ConsoleService" },
+    { "binding": "DARTS_OPS", "service": "darts-vs-squirts-ops", "entrypoint": "ConsoleService" }
   ],
   "observability": {
     "enabled": true,

@@ -1,6 +1,7 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdir, readFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { build } from 'esbuild';
 import { Miniflare, Log, LogLevel, convertV4MiniflareOptions } from 'miniflare';
 import { generateKeyPair, exportJWK, SignJWT, createLocalJWKSet } from 'jose';
@@ -29,7 +30,7 @@ async function token(overrides = {}) {
   return new SignJWT({ email: env.OWNER_EMAIL, sub: 'verified-owner', iss: `https://${env.ACCESS_TEAM_DOMAIN}`, aud: env.ACCESS_AUD, iat: now, exp: now + 300, ...overrides })
     .setProtectedHeader({ alg: 'RS256', kid: 'console-test' }).sign(keys.privateKey);
 }
-function runtime(bindings = env, serviceBindings = {}) {
+function runtime(bindings = env, serviceBindings = {}, extraWorkers = []) {
   const mf = new Miniflare(convertV4MiniflareOptions({
     workers: [{ name: 'console-test', modules: true, script: worker, compatibilityDate: '2026-10-08', bindings,
     assets: { directory: './dist', binding: 'ASSETS', run_worker_first: true, routerConfig: { has_user_worker: true } },
@@ -38,7 +39,7 @@ function runtime(bindings = env, serviceBindings = {}) {
       if (request.url === `https://${env.ACCESS_TEAM_DOMAIN}/cdn-cgi/access/certs`) return Response.json(jwks);
       if (request.url === 'https://quietatlas.io/') return new Response(null, { status: 200 });
       throw new Error('Unexpected external request');
-    } }],
+    } }, ...extraWorkers],
     log: new Log(LogLevel.ERROR)
   }));
   instances.push(mf);
@@ -149,4 +150,79 @@ test('built pages use external scripts and styles compatible with the strict CSP
   assert.doesNotMatch(html, /<script(?![^>]*\bsrc=)[^>]*>/);
   assert.doesNotMatch(html, /<style\b/);
   assert.match(html, /<script[^>]*\bsrc="\/_astro\/[^\"]+\.js"/);
+});
+
+test('every inline hydration script/style has an exact CSP hash and unsafe sources stay absent', async () => {
+  const manifest=JSON.parse(await readFile('.generated/csp.json','utf8'));
+  async function scan(path) {
+    for (const item of await readdir(path,{withFileTypes:true})) {
+      const child=`${path}/${item.name}`;
+      if (item.isDirectory()) await scan(child);
+      else if (item.name.endsWith('.html')) {
+        const html=await readFile(child,'utf8');
+        for (const [tag,key] of [['script','scripts'],['style','styles']]) for (const match of html.matchAll(new RegExp(`<${tag}\\b([^>]*)>([\\s\\S]*?)<\\/${tag}>`,'g'))) {
+          if (/\bsrc=|type="application\/json"/.test(match[1]) || !match[2].trim()) continue;
+          assert.ok(manifest[key].includes(`'sha256-${createHash('sha256').update(match[2]).digest('base64')}'`),child);
+        }
+      }
+    }
+  }
+  await scan('dist');
+  const mf=runtime();const response=await mf.dispatchFetch('https://console.test/games/kings-search/',{headers:{'Cf-Access-Jwt-Assertion':await token()}});
+  const csp=response.headers.get('content-security-policy');
+  for (const hash of [...manifest.scripts,...manifest.styles]) assert.ok(csp.includes(hash));
+  assert.doesNotMatch(csp,/unsafe-inline|unsafe-eval|https:/);
+});
+
+test('game reads use named RPC with the verified actor, explicit stage, allowed queries and bounded failures', async () => {
+  const fixture=`import {WorkerEntrypoint} from 'cloudflare:workers';
+  export class Kings extends WorkerEntrypoint {
+    async read(request) {if(request.actor.subject!=='verified-owner'||request.actor.role!=='owner'||request.resourceId!=='kings-search'||request.environment!==this.env.environment)throw Error('wrong actor or environment');
+      if(request.query?.search==='failure')throw Error('private upstream token');
+      return {status:200,body:{ok:true,data:[{id:'fixture-record',environment:this.env.environment}],total:1}};}
+    async getSummary(request){if(request.actor.subject!=='verified-owner')throw Error('bad actor');return {schemaVersion:1,resourceId:request.resourceId,collectedAt:new Date().toISOString(),readiness:'ready',metrics:[{key:'totalUsers',value:2,unit:'count',window:'current',source:'fixture'}]};}
+    async mutate(request){if(request.actor.subject!=='verified-owner'||request.environment!==this.env.environment)throw Error('bad actor');return {status:200,body:{ok:true,data:{action:request.action,target:request.targetId,count:request.count,key:request.idempotencyKey}}};}
+    async getAudit(request){if(request.actor.subject!=='verified-owner')throw Error('bad actor');return {status:200,body:{ok:true,data:[],total:0}};}
+  }
+  export class Darts extends WorkerEntrypoint {
+    async getMonitoring(request){if(request.actor.subject!=='verified-owner')throw Error('wrong actor');return {schemaVersion:1,resourceId:request.resourceId,environment:request.options.environment,analytics:null,errors:['analytics_not_configured']};}
+    async mutate(request){if(request.actor.subject!=='verified-owner')throw Error('wrong actor');return {status:200,body:{ok:true,paused:request.action==='admission_pause'}};}
+    async getAudit(request){if(request.actor.subject!=='verified-owner')throw Error('wrong actor');return {status:200,body:{ok:true,data:[]}};}
+    async getInfrastructure(request){if(request.actor.subject!=='verified-owner')throw Error('wrong actor');return {schemaVersion:1,available:false,error:'analytics_not_configured'};}
+  }
+  export default {fetch(){return new Response('no public RPC',{status:404});}};`;
+  const mf=runtime(env,{KINGS_ADMIN:{name:'kings',entrypoint:'Kings'},KINGS_STAGE:{name:'kings-stage',entrypoint:'Kings'},DARTS_OPS:{name:'darts',entrypoint:'Darts'}},[
+    {name:'kings',modules:true,script:fixture,compatibilityDate:'2026-10-08',bindings:{environment:'production'}},
+    {name:'kings-stage',modules:true,script:fixture,compatibilityDate:'2026-10-08',bindings:{environment:'staging'}},
+    {name:'darts',modules:true,script:fixture,compatibilityDate:'2026-10-08'}]);
+  const headers={'Cf-Access-Jwt-Assertion':await token(),'X-Console-Actor':'browser-forgery'};
+  async function request(path,status=200,options={}) {const response=await mf.dispatchFetch('https://console.test'+path,{headers,...options});assert.equal(response.status,status,path);return response;}
+  for(const path of ['/api/kings/users?limit=1&search=Fixture','/api/kings/users/fixture-record','/api/kings/characters','/api/kings/campaigns','/api/kings/active-campaigns','/api/kings/invite-codes','/api/kings/stats']) {
+    const data=await (await request(path)).json();assert.equal(data.data[0].environment,'production');
+  }
+  const stage=await (await request('/api/kings/users?environment=staging')).json();assert.equal(stage.data[0].environment,'staging');
+  for(const path of ['/api/kings/users?actor=forged','/api/kings/users?limit=1&limit=2','/api/kings/users?environment=unknown','/api/games/darts-vs-squirts/monitoring?hours=3','/api/games/darts-vs-squirts/monitoring?route=guessed','/api/games/darts-vs-squirts/monitoring?build=bad%27']) await request(path,400);
+  await request('/api/kings/unsupported',404);await request('/api/kings/users',403,{method:'DELETE'});
+  const commandHeaders={...headers,Origin:'https://console.test','Content-Type':'application/json','Idempotency-Key':crypto.randomUUID(),'Sec-Fetch-Site':'same-origin'};
+  const command=async(path,method,body={},status=200,extraHeaders={})=>request(path,status,{method,body:JSON.stringify(body),headers:{...commandHeaders,...extraHeaders}});
+  for(const [path,method,action] of [['/api/kings/users/fixture','DELETE','user_delete'],['/api/kings/characters/fixture/revive','POST','character_revive'],['/api/kings/active-campaigns/character/fixture','DELETE','slots_clear_character'],['/api/kings/active-campaigns/campaign/fixture','DELETE','slots_clear_campaign'],['/api/kings/invite-codes/abc123','DELETE','invite_delete'],['/api/kings/invite-codes','POST','invites_create']])assert.equal((await (await command(path,method)).json()).data.action,action);
+  await command('/api/kings/invite-codes?environment=staging','POST',{count:2});
+  await command('/api/kings/invite-codes','POST',{count:51},400);
+  await command('/api/kings/invite-codes','POST',{actor:'forged'},400);
+  await command('/api/kings/users/fixture','DELETE',{actor:'forged'},400);
+  await command('/api/kings/users/fixture','DELETE',{},403,{Origin:'https://evil.test'});
+  await command('/api/kings/users/fixture','DELETE',{},400,{'Idempotency-Key':'invalid'});
+  await command('/api/kings/users/fixture','DELETE',{},415,{'Content-Type':'text/plain'});
+  await command('/api/kings/users/fixture','DELETE',{padding:'x'.repeat(3000)},413);
+  await command('/api/kings/users','DELETE',{},405);
+  await request('/api/kings/audit');
+  await request('/api/infrastructure');await request('/api/infrastructure?account=other',400);
+  await request('/api/games/darts-vs-squirts/audit?environment=staging');
+  assert.equal((await (await command('/api/games/darts-vs-squirts/admission?environment=staging','POST',{action:'admission_pause'})).json()).paused,true);
+  await command('/api/games/darts-vs-squirts/admission','POST',{action:'raise_capacity'},400);
+  await command('/api/games/darts-vs-squirts/admission','POST',{action:'admission_pause',actor:'forged'},400);
+  const failure=await (await request('/api/kings/users?search=failure',503)).text();assert.doesNotMatch(failure,/private upstream token/);
+  assert.equal((await (await request('/api/games/darts-vs-squirts/monitoring?environment=staging&hours=1')).json()).environment,'staging');
+  const denied=await mf.dispatchFetch('https://console.test/api/kings/users');assert.equal(denied.status,401);
+  const page=await request('/games/kings-search/users/fixture-record');assert.match(await page.text(),/King’s Search/);
 });

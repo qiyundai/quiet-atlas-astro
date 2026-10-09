@@ -1,5 +1,19 @@
 # Continue the Quiet Atlas console migration
 
+## Current checkpoint: console v0.2.0
+
+Private summaries, King's administration, Darts monitoring/admission, atomic
+backend audit/idempotency and shared Activity/Infrastructure are implemented
+and deployed. Both live production/staging private API checks passed. Read
+[CONSOLE_MIGRATION_V2.md](CONSOLE_MIGRATION_V2.md) first. The foundation-only
+description below records the earlier starting point, not current capability.
+
+Remaining: restore browser access for owner/mobile/CSP verification; complete
+approved account analytics credential, staging TURN and authenticated email
+setup; verify collection and inbox delivery; add verified website deployment /
+visitor sources; perform legacy dashboard cutover only after parity acceptance.
+Do not merge the draft PRs or raise admission limits as an assumed next step.
+
 ## Starting point
 
 Repository: `qiyundai/quiet-atlas-astro`; branch:

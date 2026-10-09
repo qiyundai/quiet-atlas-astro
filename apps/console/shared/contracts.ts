@@ -35,6 +35,7 @@ export interface SummaryRequest {
   resourceId: ResourceId;
   requestId: string;
   actor: ConsoleActor;
+  environment?: 'production' | 'staging';
 }
 /** Implement in each owning backend before connecting richer modules. */
 export interface ConsoleService {

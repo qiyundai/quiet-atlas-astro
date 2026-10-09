@@ -9,8 +9,9 @@ import { resources } from '../../shared/registry';
       <div class="card-top"><span class="eyebrow">{resource.kind === 'site' ? 'Website' : 'Game'}</span><span class="badge" data-status>Not checked</span></div>
       <h3><a href={resource.path}>{resource.name}</a></h3><p>{resource.description}</p>
       <p class="status-detail" data-detail>Availability and monitoring appear here once connected.</p>
-      <div class="card-foot"><a href={resource.path}>Open workspace <span aria-hidden="true">→</span></a><span>{resource.migration === 'planned' ? 'Planned' : 'Migration in progress'}</span></div>
+      {['kings-search','darts-vs-squirts'].includes(resource.id) && <p data-summary="">Current game snapshot has not been checked.</p>}
+      <div class="card-foot"><a href={resource.path}>Open workspace <span aria-hidden="true">→</span></a><span>{resource.migration === 'planned' ? 'Planned' : resource.kind==='game'?'Connected module':'Website'}</span></div>
     </article>)}</div>
   </section>
-  <section class="split"><div class="panel"><p class="eyebrow">The shared picture</p><h2>Operations in one place</h2><p>Availability is the first connection. Player activity, capacity, errors and spending will follow as each service is integrated.</p><a href="/infrastructure/">View infrastructure →</a></div><div class="panel"><p class="eyebrow">Safe transition</p><h2>Your existing tools remain available</h2><p>Each game’s workspace links to its current admin tools while its controls and reporting move into the console.</p><a href="/activity/">View activity →</a></div></section>
+  <section class="split"><div class="panel"><p class="eyebrow">The shared picture</p><h2>Operations in one place</h2><p>Review game administration, connection quality, admission and account usage from the shared workspace. Unconnected sources are labeled explicitly.</p><a href="/infrastructure/">View infrastructure →</a></div><div class="panel"><p class="eyebrow">Administration</p><h2>Changes with a shared history</h2><p>Game backends retain their own data and commit console changes with a durable audit record. Existing dashboards remain available during final migration checks.</p><a href="/activity/">View activity →</a></div></section>
 </Console>
