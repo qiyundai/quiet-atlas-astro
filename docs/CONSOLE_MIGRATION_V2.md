@@ -1,7 +1,7 @@
 # Console v0.2.0 migration checkpoint — 2026-10-08
 
 Deployed at https://admin.quietatlas.io/, version
-`9b165dbc-342a-4f3c-93a7-b6e7ed21f9e1`. Existing exact-owner Access application,
+`6afe242a-a7c9-4416-b830-d75b6302a128`. Existing exact-owner Access application,
 audience and disabled direct origin are preserved. Public Astro site source and
 root dependencies are unchanged. Owner/account identifiers and operational
 screenshots stay outside this public repository.
@@ -53,11 +53,17 @@ screenshots stay outside this public repository.
   dates, status filtering and detail navigation; Darts production/staging
   monitoring and confirmed staging pause then resume; shared staging Activity
   showed both games' committed changes. The original admission state was restored.
-  Browser error/warning logs were empty. Infrastructure honestly reported the
-  missing credential. Mobile navigation and wrapped game tabs passed at 390 x
+  Browser error/warning logs were empty. Infrastructure now reads live account
+  GraphQL usage/cost; WAE production/staging admission results also passed after
+  installing the approved private analytics credential. No matching voluntary
+  gameplay samples means no data, not zero latency or a capacity benchmark.
+  Mobile navigation and wrapped game tabs passed at 390 x
   844 with no horizontal page overflow. Late Darts history requests are cancelled
   on filter changes/unmount so old-environment records cannot replace new data.
-- Darts 29 signaling/monitoring tests passed. Production native forced-TURN
+- Darts 30 signaling/monitoring tests passed, including a scheduled collection
+  regression using actual signaling readiness through the private binding while
+  public health fetches are rejected. Source failures expose allowlisted labels;
+  raw upstream responses and secrets remain private. Production native forced-TURN
   smoke: 220 checks, zero failures. Public signaling `/health` and website 200;
   owner console/new APIs/Activity anonymous 302; disabled direct origin 404.
 - Live game DO namespace IDs and existing production TURN secrets were retained.
@@ -76,22 +82,29 @@ and responsive acceptance now passed as recorded above. Private screenshots stay
 outside this public repository. Legacy dashboards remain available until the
 remaining source, alert-delivery and parity/cutover gates are complete.
 
-Account analytics read credential, isolated staging TURN credentials and
-authenticated notification sender remain pending. No new persistent account
-token, staging TURN key or email sender was created in this increment. The exact
-account-owned Account Analytics Read-only token, expiring January 7, 2027, is
-prepared at the Cloudflare review screen awaiting action-time approval. Email
-Sending lists no onboarded sending subdomains. Ops cron
-is still inactive; production health reports monitoring_ok false honestly.
+The approved account-owned Account Analytics Read-only token, expiring January
+7, 2027, is active and installed only as the private ops Worker secret. Rotate
+before expiry. The temporary credential file and clipboard value were cleared.
+Five-minute ops collection is enabled, with public/direct routes disabled.
+The real 2026-10-09 05:50:18 UTC poll completed with no source errors or active
+alerts; production /health reports monitoring_ok true. This does not establish
+email delivery or independent outage detection.
+Active console alerts now evaluate current conditions independently of email
+delivery receipts; backend regressions cover both activation and recovery with
+no email binding. The initial scheduled HTTP health probe failed inside Cloudflare;
+the collector now uses the existing private Operations readiness method without
+calling back into monitoring. Isolated staging TURN credentials, game key attribution and an
+authenticated notification sender remain pending. Email Sending lists no
+onboarded sending subdomains.
 Email inbox delivery and alert/recovery verification remain required. Website
 visitor/performance/deployment reporting and legacy dashboard redirects remain
 unfinished. Nomadic Hearth has no backend to connect yet.
 
 Private backend revisions: King's production `5de5fbbc-6e0e-4cf2-a8cf-4fcf1dc733b4`,
 staging `6bb52d7c-abe9-4dd7-a2dd-7e9062bb0937`; Darts production
-`43298b91-211b-4dc7-9a73-42b694aa9baa`, staging
-`e81b9ce2-a7e5-4439-9d95-6f563ff5ae62`; private ops
-`5f3de806-fe5b-4416-b6d1-79dff50017b5`.
+`c5a87557-156a-4236-b6aa-a5da6975acfc`, staging
+`cc1a82d6-bea2-4daf-b723-a8942d8e9b97`; private ops
+`f5f44bea-97dd-4887-bd2c-d5a63a67f252`.
 
 ## Rollback
 

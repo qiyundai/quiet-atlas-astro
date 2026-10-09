@@ -57,6 +57,7 @@ interface Snapshot {
   analytics: Analytics | null;
   pollAt: string | null;
   pollFresh: boolean;
+  collectionErrors?: string[];
   cost: {
     observed_estimate_usd: number;
     projected_usd: number;
@@ -73,6 +74,13 @@ const choices: Record<string, string[]> = {
   mode: ["toybox", "deathmatch", "team_deathmatch", "lobby"],
   role: ["host", "guest"],
   route: ["direct", "relay", "mixed", "unknown"],
+};
+const collectionSources: Record<string, string> = {
+  production_budget_unavailable: "production admission counters",
+  staging_budget_unavailable: "staging admission counters",
+  health_unavailable: "signaling readiness",
+  analytics_unavailable: "admission analytics",
+  resources_unavailable: "account resource usage",
 };
 const value = (number: number | null | undefined) =>
   number == null
@@ -577,6 +585,11 @@ export default function DartsMonitoring() {
                 ? `Last collection ${new Date(data.pollAt).toLocaleString()}${data.pollFresh ? "" : " · stale"}`
                 : "Scheduled collection has not completed."}
             </p>
+            {!!data.collectionErrors?.length && (
+              <p role="alert">
+                Collection could not read: {data.collectionErrors.map((error) => collectionSources[error] ?? "a monitoring source").join(", ")}.
+              </p>
+            )}
             <p>
               {data.notifications.configured
                 ? data.notifications.deliveryFailed

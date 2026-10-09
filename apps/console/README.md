@@ -3,8 +3,9 @@
 Owner-only shared operations workspace at `https://admin.quietatlas.io`. This is
 console v0.2.0: common identity and navigation, private game summaries, King's
 Search administration, Darts monitoring and audited admission controls, plus
-shared activity and account infrastructure views. Analytics/cost require the
-pending account-restricted read credential. Email delivery and website
+shared activity and account infrastructure views. Live analytics/cost reads use
+the approved account-restricted read credential stored only on private ops;
+rotate it before January 7, 2027. Email delivery and website
 analytics/deployments are not verified yet; missing sources say unavailable.
 
 The public Astro site at the repository root keeps its current build and Pages

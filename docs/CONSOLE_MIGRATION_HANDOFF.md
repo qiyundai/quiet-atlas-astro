@@ -9,9 +9,10 @@ and deployed. Both live production/staging private API checks passed. Read
 description below records the earlier starting point, not current capability.
 
 Live owner/CSP/module rendering and mobile acceptance passed; see the current
-validation checkpoint. Remaining: complete action-time-approved account analytics
-credential, staging TURN and authenticated email
-setup; verify collection and inbox delivery; add verified website deployment /
+validation checkpoint. The approved analytics-only credential is installed on
+private ops, with live GraphQL/WAE reads verified and five-minute collection
+enabled. Rotate before January 7, 2027. Remaining: staging TURN and authenticated
+email setup; verify inbox delivery; add verified website deployment /
 visitor sources; perform legacy dashboard cutover only after parity acceptance.
 Do not merge the draft PRs or raise admission limits as an assumed next step.
 
