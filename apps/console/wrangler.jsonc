@@ -10,6 +10,7 @@
   "vars": { "ENVIRONMENT": "production" },
   "secrets": { "required": ["ACCESS_TEAM_DOMAIN", "ACCESS_AUD", "OWNER_EMAIL"] },
   "services": [
+    { "binding": "LACUNA_OPS", "service": "lacuna-api", "entrypoint": "ConsoleService" },
     { "binding": "KINGS_API", "service": "kings-search-admin" },
     { "binding": "DARTS_SIGNALING", "service": "darts-vs-squirts-signaling" },
     { "binding": "KINGS_ADMIN", "service": "kings-search-admin", "entrypoint": "ConsoleService" },

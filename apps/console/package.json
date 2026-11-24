@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@astrojs/react": "7.0.1",
-    "astro": "7.3.8",
+    "astro": "7.4.13",
     "jose": "6.2.12",
     "oxc-transform-react": "0.145.0",
     "react": "19.3.0",
@@ -35,9 +35,9 @@
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "esbuild": "0.28.2",
-    "miniflare": "5.20261006.1-alpha",
+    "miniflare": "5.20261123.0-beta",
     "tailwindcss": "4.3.3",
     "typescript": "5.9.3",
-    "wrangler": "4.149.0"
+    "wrangler": "4.167.0"
   }
 }

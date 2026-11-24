@@ -1,0 +1,55 @@
+---
+import Console from '../../layouts/Console.astro';
+---
+<Console title="Lacuna" eyebrow="Applications" description="Current service health and totals from billing, mail and infrastructure records.">
+  <section class="panel" aria-labelledby="health-heading">
+    <div class="section-heading">
+      <div><h2 id="health-heading">Service health</h2><p id="lacuna-checked" aria-live="polite">Loading service status…</p></div>
+      <button type="button" id="lacuna-refresh">Refresh</button>
+    </div>
+    <dl>
+      <dt>Scheduled maintenance</dt><dd id="lacuna-health">Unavailable</dd>
+      <dt>Last maintenance check</dt><dd id="lacuna-maintenance">Unavailable</dd>
+    </dl>
+  </section>
+  <section class="panel" aria-labelledby="operations-heading">
+    <h2 id="operations-heading">Operational totals</h2>
+    <table>
+      <thead><tr><th scope="col">Measure</th><th scope="col">Current value</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Accounts with paid access</th><td id="lacuna-paid">Unavailable</td></tr>
+        <tr><th scope="row">Sign-in requests toward today’s mail limit (UTC)</th><td id="lacuna-mail">Unavailable</td></tr>
+        <tr><th scope="row">Encrypted sync storage</th><td id="lacuna-storage">Unavailable</td></tr>
+        <tr><th scope="row">Reflection budget used or reserved this month (UTC)</th><td id="lacuna-budget">Unavailable</td></tr>
+      </tbody>
+    </table>
+  </section>
+</Console>
+<script>
+  const button = document.querySelector<HTMLButtonElement>('#lacuna-refresh')!;
+  const fields = Object.fromEntries(['checked','health','maintenance','paid','mail','storage','budget'].map(
+    key => [key, document.getElementById('lacuna-' + key)!]
+  ));
+  const usd = new Intl.NumberFormat(undefined, {style:'currency', currency:'USD', currencyDisplay:'code'});
+  const mib = (bytes: number) => (bytes / 1048576).toLocaleString(undefined, {maximumFractionDigits:2});
+  async function load() {
+    button.disabled = true;
+    try {
+      const response = await fetch('/api/apps/lacuna', {cache:'no-store', signal:AbortSignal.timeout(8000)});
+      if (!response.ok) throw Error();
+      const data = await response.json();
+      fields.health.textContent = data.healthy ? 'Healthy' : 'Needs attention';
+      fields.maintenance.textContent = data.lastMaintenance === null ? 'No check recorded' : new Date(data.lastMaintenance * 1000).toLocaleString();
+      fields.paid.textContent = data.paidAccounts.toLocaleString();
+      fields.mail.textContent = data.signInAttempts.toLocaleString();
+      fields.storage.textContent = mib(data.syncBytes) + ' of ' + mib(data.syncLimitBytes) + ' MiB';
+      fields.budget.textContent = usd.format(data.budgetMicros / 1000000) + ' of ' + usd.format(data.budgetLimitMicros / 1000000);
+      fields.checked.textContent = 'Checked ' + new Date(data.checkedAt).toLocaleString();
+    } catch {
+      for (const field of Object.values(fields)) field.textContent = 'Unavailable';
+      fields.checked.textContent = 'Could not retrieve the Lacuna summary.';
+    } finally { button.disabled = false; }
+  }
+  button.addEventListener('click', load);
+  void load();
+</script>
