@@ -1,11 +1,11 @@
 /** Versioned, sanitized responses. No player records, credentials or raw logs. */
-export type ResourceId = 'kings-search' | 'darts-vs-squirts' | 'quiet-atlas' | 'nomadic-hearth';
+export type ResourceId = 'kings-search' | 'darts-vs-squirts' | 'quiet-atlas' | 'nomadic-hearth' | 'lacuna';
 export type Availability = 'reachable' | 'unavailable' | 'unknown';
 export type Migration = 'linked' | 'planned';
 export interface Resource {
   id: ResourceId;
   name: string;
-  kind: 'game' | 'site';
+  kind: 'game' | 'site' | 'app';
   path: string;
   description: string;
   migration: Migration;

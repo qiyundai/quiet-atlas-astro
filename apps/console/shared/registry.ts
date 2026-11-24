@@ -3,6 +3,11 @@ import type { Resource } from './contracts';
 /** Approved destinations only. No caller-controlled upstream URLs or bindings. */
 export const resources: readonly Resource[] = [
   {
+    id: 'lacuna', name: 'Lacuna', kind: 'app', path: '/apps/lacuna/',
+    description: 'Billing, sign-in email, encrypted storage and reflection costs.',
+    migration: 'linked', capabilities: ['operational-summary']
+  },
+  {
     id: 'kings-search', name: "King’s Search", kind: 'game', path: '/games/kings-search/',
     description: 'Players, characters, campaigns and invitations.', migration: 'linked',
     legacyAdmin: 'https://ks-admin.quietatlas.io', capabilities: ['service-reachability', 'private-summary', 'player-administration', 'audited-actions']

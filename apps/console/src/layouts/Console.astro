@@ -5,7 +5,7 @@ const { title, eyebrow = 'Quiet Atlas', description } = Astro.props;
 const path = Astro.url.pathname;
 const nav = [
   { name: 'Overview', path: '/' },
-  ...resources.filter(r => r.kind === 'game').map(r => ({ name: r.name, path: r.path })),
+  ...resources.filter(r => r.kind !== 'site').map(r => ({ name: r.name, path: r.path })),
   { name: 'Quiet Atlas website', path: '/sites/quiet-atlas/' },
   { name: 'Infrastructure', path: '/infrastructure/' },
   { name: 'Activity', path: '/activity/' }

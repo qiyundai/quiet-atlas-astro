@@ -71,7 +71,7 @@ test('real Worker and real built assets deny anonymous or forged access on every
   const html = await readFile('dist/index.html', 'utf8');
   const assetPaths = [...html.matchAll(/(?:src|href)="(\/_astro\/[^\"]+)"/g)].map(match => match[1]);
   assert.ok(assetPaths.length >= 2);
-  for (const path of ['/', '/games/kings-search/', '/logo.png', ...assetPaths, '/api/session', '/api/overview', '/api/sites/quiet-atlas', '/anything']) {
+  for (const path of ['/', '/games/kings-search/', '/apps/lacuna/', '/logo.png', ...assetPaths, '/api/session', '/api/overview', '/api/sites/quiet-atlas', '/api/apps/lacuna', '/anything']) {
     const response = await mf.dispatchFetch(`https://admin.quietatlas.io${path}`);
     assert.equal(response.status, 401, `${path}: ${response.status === 401 ? '' : await response.clone().text()}`);
     assert.match(response.headers.get('cache-control'), /no-store/);
@@ -89,7 +89,7 @@ test('real Worker and real built assets deny anonymous or forged access on every
 test('valid owner can load actual pages/assets and APIs without API-to-HTML fallback', async () => {
   const mf = runtime();
   const headers = { 'Cf-Access-Jwt-Assertion': await token() };
-  for (const path of ['/', '/games/kings-search/', '/games/darts-vs-squirts/', '/games/nomadic-hearth/', '/sites/quiet-atlas/', '/infrastructure/', '/activity/', '/404.html']) {
+  for (const path of ['/', '/games/kings-search/', '/games/darts-vs-squirts/', '/games/nomadic-hearth/', '/sites/quiet-atlas/', '/apps/lacuna/', '/infrastructure/', '/activity/', '/404.html']) {
     const response = await mf.dispatchFetch(`https://admin.quietatlas.io${path}`, { headers });
     assert.equal(response.status, 200, path);
     assert.match(await response.text(), /Quiet Atlas Console/);
@@ -106,6 +106,29 @@ test('valid owner can load actual pages/assets and APIs without API-to-HTML fall
 test('missing production auth config fails closed including assets', async () => {
   const mf = runtime({ ...env, ACCESS_AUD: '' });
   assert.equal((await mf.dispatchFetch('https://admin.quietatlas.io/logo.png')).status, 503);
+});
+
+test('Lacuna returns only agreed operational totals and fails closed on missing fields', async () => {
+  const summary = {
+    checkedAt:'2026-11-23T12:00:00.000Z', healthy:false, lastMaintenance:null,
+    paidAccounts:0, syncBytes:0, syncLimitBytes:134217728, signInAttempts:0,
+    budgetMicros:2400, budgetLimitMicros:15000000
+  };
+  let omitMetric = false;
+  const mf = runtime(env, {LACUNA_OPS: async request => {
+    assert.equal(new URL(request.url).pathname, '/summary');
+    return Response.json({...summary, version:1, privateField:'private-test-value', paidAccounts:omitMetric ? undefined : 0});
+  }});
+  const headers = {'Cf-Access-Jwt-Assertion':await token()};
+  const url = 'https://admin.quietatlas.io/api/apps/lacuna';
+  const response = await mf.dispatchFetch(url, {headers});
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get('cache-control'), /no-store/);
+  assert.deepEqual(await response.json(), summary);
+  omitMetric = true;
+  assert.equal((await mf.dispatchFetch(url, {headers})).status, 503);
+  assert.equal((await mf.dispatchFetch(url + '?account=someone', {headers})).status, 400);
+  assert.equal((await mf.dispatchFetch(url, {method:'POST',headers})).status, 405);
 });
 
 test('private health probes isolate failure and redact arbitrary upstream data', async () => {

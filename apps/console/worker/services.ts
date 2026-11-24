@@ -4,7 +4,7 @@ import type { Overview, Resource, ServiceStatus } from '../shared/contracts';
 const TIMEOUT_MS = 3000;
 const MAX_HEALTH_BYTES = 4096;
 
-async function boundedJson(response: Response): Promise<unknown> {
+export async function boundedJson(response: Response): Promise<unknown> {
   const reader = response.body?.getReader();
   if (!reader) throw new Error('Missing health response');
   let bytes = 0;
@@ -32,8 +32,8 @@ export async function probe(resource: Resource, env: Cloudflare.Env): Promise<Se
   };
   // Local development never calls production services or sites.
   if (env.ENVIRONMENT === 'local' || resource.id === 'nomadic-hearth') return base;
-  const binding = resource.id === 'kings-search' ? env.KINGS_API : resource.id === 'darts-vs-squirts' ? env.DARTS_SIGNALING : undefined;
-  if (resource.kind === 'game' && !binding) return base;
+  const binding = resource.id === 'lacuna' ? env.LACUNA_OPS : resource.id === 'kings-search' ? env.KINGS_API : resource.id === 'darts-vs-squirts' ? env.DARTS_SIGNALING : undefined;
+  if (resource.kind !== 'site' && !binding) return base;
   const started = performance.now();
   const controller = new AbortController();
   let timer: ReturnType<typeof setTimeout> | undefined;
@@ -43,7 +43,7 @@ export async function probe(resource: Resource, env: Cloudflare.Env): Promise<Se
       : await binding!.fetch(new Request('https://console-service.internal/health', { signal: controller.signal }));
     try {
       if (!response.ok) throw new Error('Unavailable service');
-      if (resource.kind === 'game') {
+      if (resource.kind !== 'site') {
         const data = await boundedJson(response);
         if (!data || typeof data !== 'object' || !('ok' in data) || data.ok !== true) throw new Error('Invalid health response');
       }
@@ -56,11 +56,11 @@ export async function probe(resource: Resource, env: Cloudflare.Env): Promise<Se
     })]);
     return {
       ...base, availability: 'reachable', latencyMs: Math.round(performance.now() - started),
-      evidence: resource.kind === 'game' ? 'health-endpoint' : 'public-website',
-      detail: resource.kind === 'game' ? 'The service responds. Gameplay and database readiness are not yet measured.' : 'The public website responds.'
+      evidence: resource.kind === 'site' ? 'public-website' : 'health-endpoint',
+      detail: resource.id === 'lacuna' ? 'Scheduled maintenance is current and reports healthy.' : resource.kind === 'game' ? 'The service responds. Gameplay and database readiness are not yet measured.' : 'The public website responds.'
     };
   } catch {
-    return { ...base, availability: 'unavailable', evidence: resource.kind === 'game' ? 'health-endpoint' : 'public-website',
+    return { ...base, availability: 'unavailable', evidence: resource.kind === 'site' ? 'public-website' : 'health-endpoint',
       latencyMs: Math.round(performance.now() - started), detail: 'The availability check did not complete successfully.' };
   } finally { if (timer !== undefined) clearTimeout(timer); }
 }
